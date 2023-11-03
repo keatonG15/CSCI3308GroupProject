@@ -3,6 +3,42 @@ Keaton Glassman - KeatonG15 - kegl7181@colorado.edu
 
 Application Name: Think Tank Trivia
 
+Link to Repository: 
+
 Application Description:
-Our trivia game, Think Tank Trivia, will provide users with a fun and engaging game that challenges random knowlege of users!
+    Our trivia game, Think Tank Trivia, will provide users with a fun 
+and engaging game that challenges random knowlege of users! Users 
+will be able to register for their own account, upon logging in 
+they will be greeted with a homepage that displays the option to
+play a new game, view history of previously played games, and 
+shows the user's unique highscore.
+    If the user wants to play a game, they may have the option to 
+select a genre (History, Art, Computer Science, Sports, etc...)
+(this will be an added functionality) and will then be prompted with
+a trivia question and 4 buttons, with one button containing the 
+correct answer. If the user selects the correct answer, their score
+will increase, if not, the game will end and display the score. If
+the score exceeds the user's highscore, it will update in the database
+and redirect to the homepage. 
+    If the user wants to view a history of played games, they can
+see a list of users who answered x number of questions with a score
+of x. We may order this to make a 'leaderboard' based on highscore.
+We will build this with basic implementations, and using our agile
+planning strategy, will make changes and add functionality as we see fit. 
+
+Vision Statement:
+For trivia lovers, who are searching for endless entertainment. The Think Tank Trivia is a game
+that challenges and rewards users for their high IQ. Unlike Trivia Crack, our
+product will provide different fields of trivia based on a different API. 
+
+
+
+Varsha's Ideas:
+Session Management
+Picking a genre
+Trivia API's: The Trivia Database
+Main Component: Home page, Login Page, Register Page, Trivia Page
+Secondary Component: Profile Page, History/leaderboard page, giving awards to users
+Take inspiration from other game websites like miniclip/coolmathgames
+
 
