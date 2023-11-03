@@ -4,7 +4,9 @@ Quincy Carter - QCarter7 - quca6659@colorado.edu
 
 Application Name: Think Tank Trivia
 
-Link to Repository: 
+Link to Repository...
+HTTP: https://github.com/keatonG15/CSCI3308GroupProject.git
+SSH: git@github.com:keatonG15/CSCI3308GroupProject.git
 
 Application Description:
     Our trivia game, Think Tank Trivia, will provide users with a fun 
