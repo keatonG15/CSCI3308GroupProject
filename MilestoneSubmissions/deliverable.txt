@@ -34,7 +34,18 @@ For trivia lovers, who are searching for endless entertainment. The Think Tank T
 that challenges and rewards users for their high IQ. Unlike Trivia Crack, our
 product will provide different fields of trivia based on a different API. 
 
+Communication Plan: 
+We will be using Discord for Communication over the project. It will allow us to chat, send images, and use multiple chats for different user stories.
 
+
+Meeting Plan:
+Meetings Monday and Thursday(with TA)
+Monday We will discuss what we should work on in the week and recap recitaiton 
+Thursday We meet regularly with the TA to discuss how our project is going
+
+Modularity: Zoom
+Group Chat: Messenger 
+Repository: GitHub
 
 Varsha's Ideas:
 Session Management
@@ -43,5 +54,7 @@ Trivia API's: The Trivia Database
 Main Component: Home page, Login Page, Register Page, Trivia Page
 Secondary Component: Profile Page, History/leaderboard page, giving awards to users
 Take inspiration from other game websites like miniclip/coolmathgames
+
+
 
 
