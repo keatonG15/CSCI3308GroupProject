@@ -1,13 +1,10 @@
 Team 001 - Team Awesome Sauce 
 Keaton Glassman - KeatonG15 - kegl7181@colorado.edu
 Quincy Carter - QCarter7 - quca6659@colorado.edu
-Joao Nicastro Silveira - JoaoNicastroSilveira - joni5160@colorado.edu
 
 Application Name: Think Tank Trivia
 
-Link to Repository...
-HTTP: https://github.com/keatonG15/CSCI3308GroupProject.git
-SSH: git@github.com:keatonG15/CSCI3308GroupProject.git
+Link to Repository: 
 
 Application Description:
     Our trivia game, Think Tank Trivia, will provide users with a fun 
@@ -35,18 +32,7 @@ For trivia lovers, who are searching for endless entertainment. The Think Tank T
 that challenges and rewards users for their high IQ. Unlike Trivia Crack, our
 product will provide different fields of trivia based on a different API. 
 
-Communication Plan: 
-We will be using Discord for Communication over the project. It will allow us to chat, send images, and use multiple chats for different user stories.
 
-
-Meeting Plan:
-Meetings Monday and Thursday(with TA)
-Monday We will discuss what we should work on in the week and recap recitaiton 
-Thursday We meet regularly with the TA to discuss how our project is going
-
-Modularity: Zoom
-Group Chat: Messenger 
-Repository: GitHub
 
 Varsha's Ideas:
 Session Management
@@ -58,4 +44,16 @@ Take inspiration from other game websites like miniclip/coolmathgames
 
 
 
+Communication Plan: 
+We will be using Discord for Communication over the project. It will allow us to chat, send images, and use multiple chats for different user stories.
 
+
+
+Meeting Plan:
+Meetings Monday and Thursday(with TA)
+Monday We will discuss what we should work on in the week and recap recitaiton 
+Thursday We meet regularly with the TA to discuss how our project is going
+
+Modularity: Zoom
+Group Chat: Messenger 
+Repository: GitHub
