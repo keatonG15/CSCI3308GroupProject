@@ -1,4 +1,8 @@
 Team 001 - Team Awesome
 Keaton Glassman - KeatonG15 - kegl7181@colorado.edu
 
+Application Name: Think Tank Trivia
+
+Application Description:
+Our trivia game, Think Tank Trivia, will provide users with a fun and engaging game that challenges random knowlege of users!
 
