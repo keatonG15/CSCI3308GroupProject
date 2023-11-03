@@ -47,7 +47,7 @@ Take inspiration from other game websites like miniclip/coolmathgames
 Communication Plan: 
 We will be using Discord for Communication over the project. It will allow us to chat, send images, and use multiple chats for different user stories.
 
-
+test
 
 Meeting Plan:
 Meetings Monday and Thursday(with TA)
