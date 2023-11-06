@@ -58,6 +58,6 @@ Main Component: Home page, Login Page, Register Page, Trivia Page
 Secondary Component: Profile Page, History/leaderboard page, giving awards to users
 Take inspiration from other game websites like miniclip/coolmathgames
 
-
+The Trivia API: https://the-trivia-api.com/
 
 
