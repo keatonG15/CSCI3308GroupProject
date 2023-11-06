@@ -62,12 +62,75 @@ app.use(
 // *****************************************************
 
 app.get('/', (req ,res) =>{
-    res.redirect('/login');
+  res.redirect('/login');
 });
 
 app.get('/login', (req, res) => {
-    res.render('pages/login.ejs');
+  res.render('pages/login.ejs');
 });
+
+app.get('/register', (req , res)=> {
+res.render('pages/register.ejs');
+});
+
+app.post('/register', async (req, res) => {
+const username = req.body.username;
+const hash = await bcrypt.hash(req.body.password, 10);
+const query = `INSERT INTO users (username, password, highscore) VALUES ('${username}', '${hash}', '0');`;
+// console.log('Username: ', username);
+// console.log('Password: ', hash);
+
+db.none(query)
+.then(()=>{
+res.redirect('/login');
+})
+.catch((error) =>{
+res.redirect('/register');
+
+});
+
+});
+
+app.post('/login',  (req,res)=>{
+const Uname = req.body.username;
+const getUser = `SELECT * FROM users WHERE username = '${Uname}';`;
+db.one(getUser)
+  .then(async function (data){
+      
+//    console.log('Username: ' + data.username + ' Password: ' + data.password);
+      console.log("User Inputted: " + req.body.username + " - " + req.body.password  + "\nTable Found: " + data.username + " - " + data.password);
+     
+      const match = await bcrypt.compare(req.body.password, data.password);
+
+    //  console.log("Match: " + match);
+      if(match){
+      req.session.user = data;
+      req.session.save();
+     // console.log("here");
+      res.redirect('/discover');
+      }else{
+        res.render("pages/login.ejs", {message: `Invalid username or password`, error: true});
+      }
+  })
+  .catch(function (err) {
+    res.render("pages/register.ejs", {message: `Username not found.`, error: true});
+      
+  });
+});
+
+
+
+
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to login page.
+    return res.redirect('/login');
+  }
+  next();
+};
+app.use(auth);
+
+
 // *********************************
 // <!-- Section 5 : Start Server-->
 // *********************************
