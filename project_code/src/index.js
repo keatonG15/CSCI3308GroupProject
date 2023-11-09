@@ -165,7 +165,7 @@ axios({
 })
   .then(results => {
    // var score = 0;
-    console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+    //console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
     res.render("pages/trivia.ejs", 
     {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data});
   })

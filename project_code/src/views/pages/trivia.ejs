@@ -1,8 +1,52 @@
 <%- include ('../partials/header') %> 
+<script>
+    function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
+
+  const answers = ["<%=trivia[0].incorrectAnswers[0]%>", "<%=trivia[0].incorrectAnswers[1]%>", "<%=trivia[0].incorrectAnswers[2]%>", "<%=trivia[0].correctAnswer%>"]
+  const nums = [0,1,2,3] 
+  const rando = []  
+  function jumbleButtons(){
+  
+    var completed = 0; 
+      while(completed < 4){ 
+         var num = getRandomInt(4) 
+          if(nums[num] != 100){ 
+            rando.push(nums[num]) 
+            nums[num] = 100  
+            completed++ 
+          } 
+      } 
+    console.log(rando) 
+    console.log(answers);
+    assignButtons();
+  }
+
+  function assignButtons(){
+    document.getElementById("A1").innerHTML = answers[rando[0]]
+    document.getElementById("h1").value = answers[rando[0]]
+
+    document.getElementById("A2").innerHTML = answers[rando[1]]
+    document.getElementById("h2").value = answers[rando[1]]
+
+    document.getElementById("A3").innerHTML = answers[rando[2]]
+    document.getElementById("h3").value = answers[rando[2]]
+
+    document.getElementById("A4").innerHTML = answers[rando[3]]
+    document.getElementById("h4").value = answers[rando[3]]
+
+   
+  
+ 
+  }
+</script>
 <main>
+<body onload="jumbleButtons()"></body>
+  <div class="container" >
 
-  <div class="container">
+
     <!-- Trivia page HTML HERE -->
     <form action="/home" method="GET">
       <input style = "float: left;"class="btn btn-primary" type="submit" value="Home"/>
@@ -18,27 +62,27 @@
     <div class="text-center">
 
       <form action="/verifyAnswer" method="POST">
-        <input hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
+        <input id="h1"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
         <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button style=" display:inline-block;" class="btn btn-primary" type="submit" ><%=trivia[0].incorrectAnswers[0]%></button>
+        <button  id="A1" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
       </form>
     <br>  
       <form action="/verifyAnswer" method="POST">
-        <input hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
+        <input id="h2"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
         <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button style=" display:inline-block;" class="btn btn-primary" type="submit" ><%=trivia[0].incorrectAnswers[1]%></button>
+        <button  id="A2" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
       </form>
-<br>
+    <br>
+    <form action="/verifyAnswer" method="POST">
+      <input id="h3"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
+      <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
+      <button  id="A3" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+    </form>
+    <br>
       <form action="/verifyAnswer" method="POST">
-        <input hidden type="text" name="answer" value= "<%=trivia[0].correctAnswer%>"/>
+        <input  id="h4" hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
         <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button style=" display:inline-block;" class="btn btn-primary" type="submit" ><%=trivia[0].correctAnswer%></button>
-      </form>
-<br>
-      <form action="/verifyAnswer" method="POST">
-        <input hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
-        <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button style=" display:inline-block;" class="btn btn-primary" type="submit" ><%=trivia[0].incorrectAnswers[2]%></button>
+        <button  id="A4" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
       </form>
       <!-- <button onclick="test('%=trivia[0].incorrectAnswers[0]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[0]%></button> -->
 
