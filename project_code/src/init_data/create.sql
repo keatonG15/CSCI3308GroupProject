@@ -5,5 +5,8 @@ highscore int
 );
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
