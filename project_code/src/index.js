@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcrypt'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server. We'll learn more about it in Part B.
+const path = require('path')
 
 // *****************************************************
 // <!-- Section 2 : Connect to DB -->
@@ -41,6 +42,10 @@ db.connect()
 
 app.set('view engine', 'ejs'); // set the view engine to EJS
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+app.use(express.static(path.join(__dirname, 'resources')));
+
+
+
 
 // initialize session variables
 app.use(
@@ -177,7 +182,32 @@ axios({
 app.post('/verifyAnswer', (req, res) =>{
 
 console.log("Score", req.session.user.currentscore);
-console.log("Answer" , req.body.name);
+var newScore = req.session.user.currentscore + 10;
+//need help getting the asnwer the user selected
+//need help getting the correct answer for comparison
+console.log("Answer" , req.body);
+//console.log("Correct Answer", results.data.correctAnswer);
+if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
+  console.log("Correct!!!")
+  const updateScore =
+      'update users set currentscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(updateScore, [newScore, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.currentscore = newScore
+      res.redirect('/play');
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+
+}else{
+  console.log("Incorrect!!!")
+  res.redirect('/home');
+}
 
 
 

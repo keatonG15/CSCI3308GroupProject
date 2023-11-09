@@ -17,18 +17,43 @@
     <br>
     <div class="text-center">
 
-    <form action="/verifyAnswer" method="POST">
-      <input name = "B1" class="btn btn-danger" type="submit" value = "<%=trivia[0].incorrectAnswers[0]%>" >
-      <input name = "B2" class="btn btn-danger" type="submit" value = "<%=trivia[0].incorrectAnswers[1]%>">
-      <input name = "B3" class="btn btn-success" type="submit" value = "<%=trivia[0].correctAnswer%>">
-      <input name = "B4" class="btn btn-danger" type="submit" value = "<%=trivia[0].incorrectAnswers[2]%>">
-    </form>
+      <form action="/verifyAnswer" method="POST">
+        <input hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
+        <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
+        <button class="btn btn-danger" type="submit" ><%=trivia[0].incorrectAnswers[0]%></button>
+      </form>
+    <br>  
+      <form action="/verifyAnswer" method="POST">
+        <input hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
+        <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
+        <button class="btn btn-danger" type="submit" ><%=trivia[0].incorrectAnswers[1]%></button>
+      </form>
+<br>
+      <form action="/verifyAnswer" method="POST">
+        <input hidden type="text" name="answer" value= "<%=trivia[0].correctAnswer%>"/>
+        <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
+        <button class="btn btn-danger" type="submit" ><%=trivia[0].correctAnswer%></button>
+      </form>
+<br>
+      <form action="/verifyAnswer" method="POST">
+        <input hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
+        <input hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
+        <button class="btn btn-danger" type="submit" ><%=trivia[0].incorrectAnswers[2]%></button>
+      </form>
+      <!-- <button onclick="test('%=trivia[0].incorrectAnswers[0]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[0]%></button> -->
+
+    <!-- <form action="/verifyAnswer" method="POST">
+      <input name = "B1" class="btn btn-danger" type="submit" value = "%=trivia[0].incorrectAnswers[0]%>" onclick="test('%=trivia[0].incorrectAnswers[0]%>')">
+      <input name = "B2" class="btn btn-danger" type="submit" value = "%=trivia[0].incorrectAnswers[1]%>">
+      <input name = "B3" class="btn btn-success" type="submit" value = "%=trivia[0].correctAnswer%>">
+      <input name = "B4" class="btn btn-danger" type="submit" value = "%=trivia[0].incorrectAnswers[2]%>">
+    </form> -->
 
 
-    <!-- <button class="btn btn-danger" type="button" onclick="checkAnswer('%=trivia[0].incorrectAnswers[0]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[0]%></button>
-    <button class="btn btn-danger" type="button" onclick="checkAnswer('%=trivia[0].incorrectAnswers[1]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[1]%></button>
-    <button class="btn btn-success" type="button" onclick="checkAnswer('%=trivia[0].correctAnswer%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].correctAnswer%></button>
-    <button class="btn btn-danger" type="button" onclick="checkAnswer('%=trivia[0].incorrectAnswers[2]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[2]%></button> -->
+    <!-- <button class="btn btn-danger" type="button" onclick="test('<%=trivia[0].incorrectAnswers[0]%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].incorrectAnswers[0]%></button>
+    <button class="btn btn-danger" type="button" onclick="test('<%=trivia[0].incorrectAnswers[1]%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].incorrectAnswers[1]%></button>
+    <button class="btn btn-success" type="button" onclick="test('<%=trivia[0].correctAnswer%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].correctAnswer%></button>
+    <button class="btn btn-danger" type="button" onclick="test('<%=trivia[0].incorrectAnswers[2]%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].incorrectAnswers[2]%></button> -->
 
 
   <br>
@@ -44,21 +69,8 @@
 Once we have user input, make query to find right answer for question, compare and perform the correspoinding action for correct/incorrect answer -->
 
 
-  </div>
-  <script>
-  //   function checkAnswer(answer, correctAnswer){
-  //     console.log(answer);
-  //     console.log(correctAnswer);
-  //     if(answer.localeCompare(correctAnswer) == 0){
-  //       document.getElementById("correctorno").innerHTML = "Correct!";
-  
-  //     }else{
-  
-  //       document.getElementById("correctorno").innerHTML = "Incorrect";
-  //     }
-  
-  //   }
-  // </script>
+
+
 
 </main>
 
