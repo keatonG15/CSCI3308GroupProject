@@ -107,7 +107,7 @@ db.one(getUser)
       req.session.user = data;
       req.session.save();
      // console.log("here");
-      res.redirect('/discover');
+      res.redirect('/home');
       }else{
         res.render("pages/login.ejs", {message: `Invalid username or password`, error: true});
       }
@@ -129,6 +129,26 @@ const auth = (req, res, next) => {
   next();
 };
 app.use(auth);
+
+app.get('/home', (req, res) => {
+res.render("pages/home.ejs",{
+  username: req.session.user.username,
+  password: req.session.user.password,
+  highscore: req.session.user.highscore
+});
+
+
+});
+
+app.get('/play', (req,res) => {
+  var score = 0;
+res.render("pages/trivia.ejs", {score: score, highscore: req.session.user.highscore});
+});
+
+// app.get('', (req,res)=>{
+
+// });
+//pg promise 
 
 
 // *********************************

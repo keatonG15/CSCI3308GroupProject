@@ -4,6 +4,27 @@
 
   <div class="container">
     <!-- Trivia page HTML HERE -->
+    <form action="/home" method="GET">
+      <input style = "float: left;"class="btn btn-primary" type="submit" value="Home"/>
+    </form>
+    <h3 style="float: right;">Score = <%= score%> </h3>
+    <br>
+    <br>
+    <h3 style = "float: right;">Highscore = <%=highscore%></h3>
+    <br><br><br>
+    <h1 style="text-align: center;"> Display Question Here</h1>
+    <br>
+    <br>
+    <div class="text-center">
+    <form action="/home" method="GET">
+      <input class="btn btn-danger" type="submit" value="A1"/>
+      <input class="btn btn-danger" type="submit" value="A2"/>
+      <input class="btn btn-success" type="submit" value="A3"/>
+      <input class="btn btn-danger" type="submit" value="A4"/>
+    </form>
+  </div>
+
+
   </div>
   
 
