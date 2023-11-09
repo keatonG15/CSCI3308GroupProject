@@ -76,7 +76,7 @@ res.render('pages/register.ejs');
 app.post('/register', async (req, res) => {
 const username = req.body.username;
 const hash = await bcrypt.hash(req.body.password, 10);
-const query = `INSERT INTO users (username, password, highscore, currScore) VALUES ('${username}', '${hash}', '0', '0');`;
+const query = `INSERT INTO users (username, password, highscore, currentScore) VALUES ('${username}', '${hash}', '0', '0');`;
 // console.log('Username: ', username);
 // console.log('Password: ', hash);
 
@@ -131,11 +131,12 @@ const auth = (req, res, next) => {
 app.use(auth);
 
 app.get('/home', (req, res) => {
+  console.log(req.session.user);
 res.render("pages/home.ejs",{
   username: req.session.user.username,
   password: req.session.user.password,
   highscore: req.session.user.highscore,
-  currScore: req.session.user.currScore,
+  currscore: req.session.user.currentscore,
 });
 
 
@@ -158,14 +159,29 @@ axios({
   // },
 })
   .then(results => {
+   // var score = 0;
     console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
     res.render("pages/trivia.ejs", 
-    {highscore: req.session.user.highscore, currScore: req.session.user.currScore, trivia: results.data});
+    {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data});
   })
   .catch(error => {
     // Handle errors
     console.log("ERROR!");
   });
+});
+
+// app.get('/verifyAnswer', (req,res)=>{
+// res.redirect('/verifyAnswer');
+// });
+
+app.post('/verifyAnswer', (req, res) =>{
+
+console.log("Score", req.session.user.currentscore);
+console.log("Answer" , req.body.name);
+
+
+
+//res.redirect('/play');
 });
 
 app.get('/logout', (req,res) =>{
