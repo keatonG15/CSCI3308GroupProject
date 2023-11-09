@@ -206,13 +206,53 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
 
 }else{
   console.log("Incorrect!!!")
-  res.redirect('/home');
+ 
+  if(req.session.user.currentscore >= req.session.user.highscore){
+    const highscore =
+      'update users set highscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(highscore, [req.session.user.currentscore, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.highscore = req.session.user.currentscore;
+     res.redirect('/gameOver');
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+  }else{
+    res.redirect('/gameOver');
+  }
+  
 }
 
 
 
 //res.redirect('/play');
 });
+
+app.get('/gameOver', (req,res)=>{
+  var reset = 0;
+  var tempScore = req.session.user.currentscore;
+  const endGame =
+      'update users set currentscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(endGame, [reset, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.currentscore = reset
+     res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore});
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+
+
+})
 
 app.get('/logout', (req,res) =>{
   req.session.destroy();
