@@ -141,8 +141,30 @@ res.render("pages/home.ejs",{
 });
 
 app.get('/play', (req,res) => {
-  var score = 0;
-res.render("pages/trivia.ejs", {score: score, highscore: req.session.user.highscore});
+  
+
+axios({
+  url: `https://the-trivia-api.com/v2/questions`,
+  method: 'GET',
+  dataType: 'json',
+  headers: {
+    'Accept-Encoding': 'application/json',
+  },
+  // params: {
+  //   apikey: process.env.API_KEY,
+  //   keyword: 'Zac Brown', //you can choose any artist/event here
+  //   size: 10 // you can choose the number of events you would like to return
+  // },
+})
+  .then(results => {
+    console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+    var score = 0;
+    res.render("pages/trivia.ejs", {score: score, highscore: req.session.user.highscore, trivia: results.data});
+  })
+  .catch(error => {
+    // Handle errors
+    console.log("ERROR!");
+  });
 });
 
 // app.get('', (req,res)=>{
