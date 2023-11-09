@@ -76,7 +76,7 @@ res.render('pages/register.ejs');
 app.post('/register', async (req, res) => {
 const username = req.body.username;
 const hash = await bcrypt.hash(req.body.password, 10);
-const query = `INSERT INTO users (username, password, highscore) VALUES ('${username}', '${hash}', '0');`;
+const query = `INSERT INTO users (username, password, highscore, currScore) VALUES ('${username}', '${hash}', '0', '0');`;
 // console.log('Username: ', username);
 // console.log('Password: ', hash);
 
@@ -134,7 +134,8 @@ app.get('/home', (req, res) => {
 res.render("pages/home.ejs",{
   username: req.session.user.username,
   password: req.session.user.password,
-  highscore: req.session.user.highscore
+  highscore: req.session.user.highscore,
+  currScore: req.session.user.currScore,
 });
 
 
@@ -158,8 +159,8 @@ axios({
 })
   .then(results => {
     console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
-    var score = 0;
-    res.render("pages/trivia.ejs", {score: score, highscore: req.session.user.highscore, trivia: results.data});
+    res.render("pages/trivia.ejs", 
+    {highscore: req.session.user.highscore, currScore: req.session.user.currScore, trivia: results.data});
   })
   .catch(error => {
     // Handle errors
@@ -167,10 +168,11 @@ axios({
   });
 });
 
-// app.get('', (req,res)=>{
+app.get('/logout', (req,res) =>{
+  req.session.destroy();
+  res.render('pages/login', {message: `Logged Out Successfully`});
 
-// });
-//pg promise 
+});
 
 
 // *********************************
