@@ -1,19 +1,31 @@
 <%- include ('../partials/header') %> 
 
-<main>
- 
 
-    <h1> Login</h1>
+<main  class="p-3 mb-2  text-success">
+  <div class="container">
+    
+
+
+
+   
+
     <form action="/login" method="POST">
+      
+     
+        <H1>Login</H1>
+   
+   
+
+ 
         <label for="username">Username:</label>
         <input class="form-control" type="text" id="name" name="username" />
         <br>
         <label for="password">Password:</label>
         <input class="form-control" type="text" id="password" name="password" />
         <br>
-        <input class="btn btn-primary" type="submit" value="Login"/>
+        <input class="btn btn-success" type="submit" value="Login"/>
       </form>
-      <p>Don't have an account?<a href="/register"> Register</a></p>
+      <p>Don't have an account?<a  href="/register"> Register</a></p>
   </div>
   <div class="col"><%- include ('../partials/message') %></div>
 
