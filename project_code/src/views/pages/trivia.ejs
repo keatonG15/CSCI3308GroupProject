@@ -48,7 +48,7 @@
 </script>
 <main>
 <body onload="jumbleButtons()"></body>
-  <div class="container" >
+  <div class="container">
 
 
     <!-- Trivia page HTML HERE -->
@@ -65,29 +65,31 @@
     <br>
     <div class="text-center">
 
+    
       <form action="/verifyAnswer" method="POST">
         <input id="h1"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
         <input id = "correctAnswer1" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button  id="A1" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+        <button  id="A1"  class="btn btn-primary" type="submit" ></button>
       </form>
-    <br>  
+      <br>
       <form action="/verifyAnswer" method="POST">
         <input id="h2"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
         <input id = "correctAnswer2" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button  id="A2" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+        <button  id="A2"   class="btn btn-primary" type="submit" ></button>
       </form>
-    <br>
+      <br>
     <form action="/verifyAnswer" method="POST">
       <input id="h3"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
       <input id = "correctAnswer3" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-      <button  id="A3" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+      <button  id="A3"   class="btn btn-primary" type="submit" ></button>
     </form>
     <br>
       <form action="/verifyAnswer" method="POST">
         <input  id="h4" hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
         <input id = "correctAnswer4" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button  id="A4" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+        <button  id="A4" class="btn btn-primary" type="submit" ></button>
       </form>
+      <br>
       <!-- <button onclick="test('%=trivia[0].incorrectAnswers[0]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[0]%></button> -->
 
     <!-- <form action="/verifyAnswer" method="POST">
