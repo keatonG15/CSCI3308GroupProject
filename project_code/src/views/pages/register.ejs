@@ -1,6 +1,6 @@
 <%- include ('../partials/header') %> 
 
-<main>
+<main  class="p-3 mb-2  text-success">
 
   <div class="container">
     <h1> Register</h1>
@@ -11,10 +11,11 @@
         <label for="password">Password:</label>
         <input class="form-control" type="text" id="password" name="password" />
         <br>
-        <input class="btn btn-primary" type="submit" value="Register"/>
+        <input class="btn btn-success" type="submit" value="Register"/>
       </form>
       <p>Already have an account?<a href="/login"> Login</a></p>
   </div>
+  <div class="col"><%- include ('../partials/message') %></div>
 
 </main>
 
