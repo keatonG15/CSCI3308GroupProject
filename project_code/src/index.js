@@ -90,7 +90,9 @@ db.none(query)
 res.redirect('/login');
 })
 .catch((error) =>{
-res.redirect('/register');
+  //res.render('/register', {message: `Username already exists`, error: true})
+
+  res.redirect('/register');
 
 });
 
