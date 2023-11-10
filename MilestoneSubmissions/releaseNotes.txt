@@ -1,4 +1,4 @@
-RELEASE NOTES (DATE,TIME,VERSION)
+RELEASE NOTES (DATE,TIME,VERSION) Team 016-001
 
 11/09 1:15 PM Release Notes v1.0.0 - alpha
     - Website is up and going where users can create an account and login to start playing the trivia game.
