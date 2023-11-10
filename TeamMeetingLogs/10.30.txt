@@ -2,12 +2,14 @@
 What have you done since the last meeting?
 This is our first team meeting! 
 
-What are you planning to do until the next meeting?
+Decisions Made/Follow-up items, including agreed-on roles and responsibilities
 Joao and Alex: Focus on SQL- Back End
 Quincy: HTML - Front End
 Keaton: JavaScript - Bridge
 Alex and Joao come up with a table on how to organize, link, and access all SQL tables
 Alex make sure the non-project specific items are on schedule (consistent weekly commits, meeting scheduling, etc…)
+
+Alternative actions/options discussed
 Quincy come up with basic UI/Wireframe for HTML page
 Keaton think of ways to link the UI to the SQL
 Keaton make sure project specifics are on schedule (SQL deadlines, HTML scheduling, etc…)
