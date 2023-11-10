@@ -1,0 +1,13 @@
+What have you done since the last meeting?
+Built directory structure
+Finished deliverable.txt
+Established ways to work on git repo and save to main branch
+
+What are you planning to do until the next meeting?
+Get docker container up and running
+Figure out the trivia API 
+
+What are the challenges you are facing?
+We are strugglin on getting index.js to work correctly with out docker-compose.yaml. It creates the node_moduls folder, but not theexpress-section directory within which is causing us errors. 
+
+

@@ -1,0 +1,31 @@
+Intended Strategy
+Week1: Get basic HTML page running with login and registration complete
+Week2: Familiarize with Trivia API and how to run the correct axios call
+Week3: Get Full page running
+Week4: Debug, test, and add functionalities
+
+Prioritize the Trivia API, getting it linked to our page and rendering with random questions may be difficult
+
+Backup plan… manually create a database of trivia questions and the necessary components, may be menial, but could be necessary if the trivia API is troublesome
+
+What are the features you are planning to implement?
+Trivia API
+Populate the trivia page with questions/answers from the API
+Updating score when correct, ending game when incorrect
+
+What have you done since the last meeting?
+Built directory structure
+Finished deliverable.txt
+Established ways to work on git repo and save to main branch
+
+What are you planning to do until the next meeting?
+Get docker container up and running
+Figure out the trivia API 
+
+What are the challenges you are facing?
+We cant get all teammembers to run docker compose up without an error, potentially and issue with repository ownership?
+
+
+
+
+
