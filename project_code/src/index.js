@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcrypt'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server. We'll learn more about it in Part B.
+const path = require('path')
 
 // *****************************************************
 // <!-- Section 2 : Connect to DB -->
@@ -41,6 +42,10 @@ db.connect()
 
 app.set('view engine', 'ejs'); // set the view engine to EJS
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+app.use(express.static(path.join(__dirname, 'resources')));
+
+
+
 
 // initialize session variables
 app.use(
@@ -76,7 +81,7 @@ res.render('pages/register.ejs');
 app.post('/register', async (req, res) => {
 const username = req.body.username;
 const hash = await bcrypt.hash(req.body.password, 10);
-const query = `INSERT INTO users (username, password, highscore, currScore) VALUES ('${username}', '${hash}', '0', '0');`;
+const query = `INSERT INTO users (username, password, highscore, currentScore) VALUES ('${username}', '${hash}', '0', '0');`;
 // console.log('Username: ', username);
 // console.log('Password: ', hash);
 
@@ -131,11 +136,12 @@ const auth = (req, res, next) => {
 app.use(auth);
 
 app.get('/home', (req, res) => {
+  console.log(req.session.user);
 res.render("pages/home.ejs",{
   username: req.session.user.username,
   password: req.session.user.password,
   highscore: req.session.user.highscore,
-  currScore: req.session.user.currScore,
+  currscore: req.session.user.currentscore,
 });
 
 
@@ -158,15 +164,95 @@ axios({
   // },
 })
   .then(results => {
-    console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+   // var score = 0;
+    //console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
     res.render("pages/trivia.ejs", 
-    {highscore: req.session.user.highscore, currScore: req.session.user.currScore, trivia: results.data});
+    {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data});
   })
   .catch(error => {
     // Handle errors
     console.log("ERROR!");
   });
 });
+
+// app.get('/verifyAnswer', (req,res)=>{
+// res.redirect('/verifyAnswer');
+// });
+
+app.post('/verifyAnswer', (req, res) =>{
+
+console.log("Score", req.session.user.currentscore);
+var newScore = req.session.user.currentscore + 10;
+//need help getting the asnwer the user selected
+//need help getting the correct answer for comparison
+console.log("Answer" , req.body);
+//console.log("Correct Answer", results.data.correctAnswer);
+if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
+  console.log("Correct!!!")
+  const updateScore =
+      'update users set currentscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(updateScore, [newScore, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.currentscore = newScore
+      res.redirect('/play');
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+
+}else{
+  console.log("Incorrect!!!")
+ 
+  if(req.session.user.currentscore >= req.session.user.highscore){
+    const highscore =
+      'update users set highscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(highscore, [req.session.user.currentscore, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.highscore = req.session.user.currentscore;
+     res.redirect('/gameOver');
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+  }else{
+    res.redirect('/gameOver');
+  }
+  
+}
+
+
+
+//res.redirect('/play');
+});
+
+app.get('/gameOver', (req,res)=>{
+  var reset = 0;
+  var tempScore = req.session.user.currentscore;
+  const endGame =
+      'update users set currentscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(endGame, [reset, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.currentscore = reset
+     res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore});
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+
+
+})
 
 app.get('/logout', (req,res) =>{
   req.session.destroy();
