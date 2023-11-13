@@ -1,4 +1,4 @@
-Team 001 - Team Awesome Sauce 
+Team 016-001 - Team Awesome Sauce 
 Keaton Glassman - KeatonG15 - kegl7181@colorado.edu
 Quincy Carter - QCarter7 - quca6659@colorado.edu
 Joao Nicastro Silveira - JoaoNicastroSilveira - joni5160@colorado.edu
@@ -45,10 +45,11 @@ Monday We will discuss what we should work on in the week and recap recitaiton
 Thursday We meet regularly with the TA to discuss how our project is going
 
 Modularity: Zoom
-Group Chat: Messenger 
+Group Chat: Discord 
 Repository: GitHub
 
 Wireframe found in /MilestoneSubmissions/Wireframe.png
+Use Case Diagram found in /MilestoneSubmissions/casediagram.png
 
 Varsha's Ideas:
 Session Management

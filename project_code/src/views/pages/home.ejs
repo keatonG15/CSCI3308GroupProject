@@ -2,8 +2,16 @@
 
 <main>
 
-  <div class="container">
+  <div class="container text-center">
     <!-- Home page HTML HERE -->
+    <form action="/logout" method="GET">
+      <input style="float: right;" class="btn btn-primary" type="submit" value="Logout"/>
+    </form>
+    <h1>Welcome <%= username %></h1>
+    <h3>Highscore: <%= highscore%> </h3>
+    <form action="/play" method="GET">
+      <input style ="width: 300px;"class="btn btn-primary" type="submit" value="Play"/>
+    </form>
   </div>
   
 

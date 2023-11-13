@@ -1,0 +1,19 @@
+10/30 Team 016-001
+What have you done since the last meeting?
+This is our first team meeting! 
+
+Decisions Made/Follow-up items, including agreed-on roles and responsibilities
+Joao and Alex: Focus on SQL- Back End
+Quincy: HTML - Front End
+Keaton: JavaScript - Bridge
+Alex and Joao come up with a table on how to organize, link, and access all SQL tables
+Alex make sure the non-project specific items are on schedule (consistent weekly commits, meeting scheduling, etc…)
+
+Alternative actions/options discussed
+Quincy come up with basic UI/Wireframe for HTML page
+Keaton think of ways to link the UI to the SQL
+Keaton make sure project specifics are on schedule (SQL deadlines, HTML scheduling, etc…)
+What are the challenges you are facing?
+We are struggling to come up with potential challenges we will run into. As of now, we have a solid idea of what we will do and have already assigned roles for each member’s strengths and weaknesses. 
+
+

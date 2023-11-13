@@ -1,0 +1,33 @@
+<%- include ('../partials/header') %> 
+<!-- <script>
+ function checkNewScore(currscore, highscore){
+    if(currscore > highscore){
+        document.getElementById("newHS").innerHTML = "New Highscore!";
+    }
+  }
+
+</script> -->
+<main>
+
+  <div class="container text-center">
+    <!-- Home page HTML HERE -->
+    <form action="/home" method="GET">
+      <input class="btn btn-primary" type="submit" value="Home"/>
+    </form>
+    <%if(currscore >= highscore){ %>
+        <h1 id="newHS">New Highscore!</h1>
+        <h3>Score: <%= currscore%> </h3>
+    <%  }else{ %>
+        <h1 id="newHS">Game over!</h1>
+        <h3>Score: <%= currscore%> </h3>
+        <h3>Highscore: <%=highscore%></h3>
+        <% } %>
+   
+   
+    
+  </div>
+  
+
+</main>
+
+<%- include ('../partials/footer') %>

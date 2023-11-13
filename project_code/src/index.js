@@ -9,10 +9,11 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcrypt'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server. We'll learn more about it in Part B.
+const path = require('path')
 
 // *****************************************************
-// <!-- Section 2 : Connect to DB -->    
-// *****************************************************   
+// <!-- Section 2 : Connect to DB -->
+// *****************************************************
 
 // database configuration
 const dbConfig = {
@@ -41,6 +42,10 @@ db.connect()
 
 app.set('view engine', 'ejs'); // set the view engine to EJS
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+app.use(express.static(path.join(__dirname, 'resources')));
+
+
+
 
 // initialize session variables
 app.use(
@@ -61,8 +66,8 @@ app.use(
 // <!-- Section 4: API Calls -->
 // *****************************************************
 
-app.get('/', (req ,res) =>{ 
-    res.redirect('/login');
+app.get('/', (req ,res) =>{
+  res.redirect('/login');
 });
 
 app.get('/login', (req, res) => {
@@ -74,20 +79,22 @@ res.render('pages/register.ejs');
 });
 
 app.post('/register', async (req, res) => {
-const username = req.body.username;
-const hash = await bcrypt.hash(req.body.password, 10);
-const query = `INSERT INTO users (username, password, highscore) VALUES ('${username}', '${hash}', '0');`;
-// console.log('Username: ', username);
-// console.log('Password: ', hash);
+  const username = req.body.username;
+  const hash = await bcrypt.hash(req.body.password, 10);
+  const query = `INSERT INTO users (username, password, highscore, currentScore) VALUES ('${username}', '${hash}', '0', '0');`;
+  // console.log('Username: ', username);
+  // console.log('Password: ', hash);
 
-db.none(query)
-.then(()=>{
-res.redirect('/login');
-})
-.catch((error) =>{
-res.redirect('/register');
+  db.none(query)
+    .then(()=>{
+    res.redirect('/login');
+  })
+  .catch((error) =>{
+    //res.render('/register', {message: `Username already exists`, error: true})
 
-});
+    res.redirect('/register');
+
+  });
 
 });
 
@@ -107,7 +114,7 @@ db.one(getUser)
       req.session.user = data;
       req.session.save();
      // console.log("here");
-      res.redirect('/discover');
+      res.redirect('/home'); //302
       }else{
         res.render("pages/login.ejs", {message: `Invalid username or password`, error: true});
       }
@@ -130,12 +137,146 @@ const auth = (req, res, next) => {
 };
 app.use(auth);
 
+app.get('/home', (req, res) => {
+  console.log(req.session.user);
+res.render("pages/home.ejs",{
+  username: req.session.user.username,
+  password: req.session.user.password,
+  highscore: req.session.user.highscore,
+  currscore: req.session.user.currentscore,
+});
+
+
+});
+
+app.get('/play', (req,res) => {
+  
+
+axios({
+  url: `https://the-trivia-api.com/v2/questions`,
+  method: 'GET',
+  dataType: 'json',
+  headers: {
+    'Accept-Encoding': 'application/json',
+  },
+  // params: {
+  //   apikey: process.env.API_KEY,
+  //   keyword: 'Zac Brown', //you can choose any artist/event here
+  //   size: 10 // you can choose the number of events you would like to return
+  // },
+})
+  .then(results => {
+   // var score = 0;
+    //console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+    if(req.session.user.currentscore > 0){
+    res.render("pages/trivia.ejs", 
+    {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data, message: `Correct! Nice Job!`});
+    }else{
+      res.render("pages/trivia.ejs", 
+    {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data});
+    
+    }
+  })
+  .catch(error => {
+    // Handle errors
+    console.log("ERROR!");
+  });
+});
+
+// app.get('/verifyAnswer', (req,res)=>{
+// res.redirect('/verifyAnswer');
+// });
+
+app.post('/verifyAnswer', (req, res) =>{
+
+console.log("Score", req.session.user.currentscore);
+var newScore = req.session.user.currentscore + 10;
+//need help getting the asnwer the user selected
+//need help getting the correct answer for comparison
+console.log("Answer" , req.body);
+//console.log("Correct Answer", results.data.correctAnswer);
+if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
+  console.log("Correct!!!")
+  const updateScore =
+      'update users set currentscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(updateScore, [newScore, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.currentscore = newScore
+      res.redirect('/play');
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+
+}else{
+  console.log("Incorrect!!!")
+ 
+  if(req.session.user.currentscore >= req.session.user.highscore){
+    const highscore =
+      'update users set highscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(highscore, [req.session.user.currentscore, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.highscore = req.session.user.currentscore;
+     res.redirect('/gameOver');
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+  }else{
+    res.redirect('/gameOver');
+  }
+  
+}
+
+
+
+//res.redirect('/play');
+});
+
+app.get('/gameOver', (req,res)=>{
+  var reset = 0;
+  var tempScore = req.session.user.currentscore;
+  const endGame =
+      'update users set currentscore = $1 where username = $2 returning * ;';
+    // $1 and $2 will be replaced by req.body.name, req.body.username
+    db.any(endGame, [reset, req.session.user.username])
+    .then(function (data) {
+     console.log("asdaskdjnakjask",data)
+     req.session.user.currentscore = reset
+     res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore});
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+
+
+})
+
+app.get('/logout', (req,res) =>{
+  req.session.destroy();
+  res.render('pages/login', {message: `Logged Out Successfully`});
+
+});
+
+
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
 
 // *********************************
 // <!-- Section 5 : Start Server-->
 // *********************************
 // starting the server and keeping the connection open to listen for more requests
-app.listen(3000, () => {
-  console.log('listening on port 3000');
-});
 
+module.exports = app.listen(3000);
