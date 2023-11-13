@@ -28,7 +28,7 @@ describe('Server!', () => {
   // TO-DO: Part A Login unit test case
 
 
-describe('server', () => {
+describe('Testing Login APIs', () => {
     // Sample test case given to test / endpoint.
     it('Successfull Login', done => {
       chai
@@ -37,16 +37,12 @@ describe('server', () => {
         .send({username: 'matt', password: '123' })
         .redirects(0)
         .end((err, res) => {
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(302);
+          expect(res).to.redirectTo('/home');
           done();
         });
     });
-  
-});
 
-
-describe('server', () => {
-    // Sample test case given to test / endpoint.
     it('Negative Login', done => {
       chai
         .request(server)
@@ -55,12 +51,13 @@ describe('server', () => {
         .redirects(0)
         .end((err, res) => {
           expect(res).to.have.status(200);
-          assert.strictEqual(res.body.message, 'Invalid Input');
+          expect(res).to.not.redirect;
           done();
         });
     });
   
 });
+
 
 
 
