@@ -45,20 +45,25 @@ describe('server', () => {
 });
 
 
-// describe('server', () => {
-//     // Sample test case given to test / endpoint.
-//     it('Negative Login', done => {
-//       chai
-//         .request(server)
-//         .post('/login')
-//         .end((err, res) => {
-//           expect(res).to.have.status(200);
-//           assert.strictEqual(res.body.message, 'Invalid Input');
-//           done();
-//         });
-//     });
+describe('server', () => {
+    // Sample test case given to test / endpoint.
+    it('Negative Login', done => {
+      chai
+        .request(server)
+        .post('/login')
+        .send({username: 'mattfregahgjnd', password: '123' })
+        .redirects(0)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          assert.strictEqual(res.body.message, 'Invalid Input');
+          done();
+        });
+    });
   
-// });
+});
+
+
+
 
 
 
