@@ -43,18 +43,18 @@ describe('Testing Login APIs', () => {
         });
     });
 
-    // it('Negative Login', done => {
-    //   chai
-    //     .request(server)
-    //     .post('/login')
-    //     .send({username: 'mattfregahgjnd', password: '123' })
-    //     .redirects(0)
-    //     .end((err, res) => {
-    //       expect(res).to.have.status(200);
-    //       expect(res).to.not.redirect;
-    //       done();
-    //     });
-    // });
+    it('Negative Login', done => {
+      chai
+        .request(server)
+        .post('/login')
+        .send({username: 'mattfregahgjnd', password: '123' })
+        .redirects(0)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.not.redirect;
+          done();
+        });
+    });
   
 });
 
