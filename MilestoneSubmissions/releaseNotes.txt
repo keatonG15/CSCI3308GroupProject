@@ -9,7 +9,11 @@ RELEASE NOTES (DATE,TIME,VERSION) Team 016-001
     - Need to redirect API and make and axios call that displays a new question
     - Better UI and graphic design. 
 
-11/09 Release Notes v1.1.0 -alpha
+11/09 4:00 Release Notes v1.1.0 -alpha 
+
+
+
+
 
 
 

@@ -79,22 +79,22 @@ res.render('pages/register.ejs');
 });
 
 app.post('/register', async (req, res) => {
-const username = req.body.username;
-const hash = await bcrypt.hash(req.body.password, 10);
-const query = `INSERT INTO users (username, password, highscore, currentScore) VALUES ('${username}', '${hash}', '0', '0');`;
-// console.log('Username: ', username);
-// console.log('Password: ', hash);
+  const username = req.body.username;
+  const hash = await bcrypt.hash(req.body.password, 10);
+  const query = `INSERT INTO users (username, password, highscore, currentScore) VALUES ('${username}', '${hash}', '0', '0');`;
+  // console.log('Username: ', username);
+  // console.log('Password: ', hash);
 
-db.none(query)
-.then(()=>{
-res.redirect('/login');
-})
-.catch((error) =>{
-  //res.render('/register', {message: `Username already exists`, error: true})
+  db.none(query)
+    .then(()=>{
+    res.redirect('/login');
+  })
+  .catch((error) =>{
+    //res.render('/register', {message: `Username already exists`, error: true})
 
-  res.redirect('/register');
+    res.redirect('/register');
 
-});
+  });
 
 });
 
@@ -114,7 +114,7 @@ db.one(getUser)
       req.session.user = data;
       req.session.save();
      // console.log("here");
-      res.redirect('/home');
+      res.redirect('/home'); //302
       }else{
         res.render("pages/login.ejs", {message: `Invalid username or password`, error: true});
       }
@@ -128,14 +128,14 @@ db.one(getUser)
 
 
 
-const auth = (req, res, next) => {
-  if (!req.session.user) {
-    // Default to login page.
-    return res.redirect('/login');
-  }
-  next();
-};
-app.use(auth);
+// const auth = (req, res, next) => {
+//   if (!req.session.user) {
+//     // Default to login page.
+//     return res.redirect('/login');
+//   }
+//   next();
+// };
+// app.use(auth);
 
 app.get('/home', (req, res) => {
   console.log(req.session.user);
@@ -269,10 +269,14 @@ app.get('/logout', (req,res) =>{
 });
 
 
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
+
 // *********************************
 // <!-- Section 5 : Start Server-->
 // *********************************
 // starting the server and keeping the connection open to listen for more requests
-app.listen(3000, () => {
-  console.log('listening on port 3000');
-});
+
+module.exports = app.listen(3000);

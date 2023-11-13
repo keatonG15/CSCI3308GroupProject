@@ -47,6 +47,8 @@
   }
 </script>
 <main>
+
+
 <body onload="jumbleButtons()"></body>
   <div class="container">
 
@@ -112,15 +114,21 @@
 </div>
 
 <div class="col"><%- include ('../partials/message') %></div>
-</div>
+  </div>
+  <script>
+    function checkAnswer(answer, correctAnswer){
+      console.log(answer);
+      console.log(correctAnswer);
+      if(answer.localeCompare(correctAnswer) == 0){
+        document.getElementById("correctorno").innerHTML = "Correct!";
 
-   
-      <!-- put all in one form, one universal API that queries the right answer, get user input (req.body.buttonclick) these are submit buttons
-Once we have user input, make query to find right answer for question, compare and perform the correspoinding action for correct/incorrect answer -->
+      }else{
 
+        document.getElementById("correctorno").innerHTML = "Incorrect";
+      }
 
-
-
+    }
+  </script>
 
 </main>
 
