@@ -138,12 +138,12 @@ db.one(getUser)
 // app.use(auth);
 
 app.get('/home', (req, res) => {
-  console.log(req.session.user);
+  console.log("Testing...", req.body);
 res.render("pages/home.ejs",{
-  username: req.session.user.username,
-  password: req.session.user.password,
-  highscore: req.session.user.highscore,
-  currscore: req.session.user.currentscore,
+  username: req.body.username,
+  // password: req.session.user.password,
+  highscore: req.body.highscore,
+  // currscore: req.session.user.currentscore,
 });
 
 
