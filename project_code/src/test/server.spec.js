@@ -122,6 +122,37 @@ it('Should not render the home page without authentication', done => {
 
 
 
+describe('Testing Login APIs', () => {
+  // Sample test case given to test / endpoint.
+  it('Successfull Login', done => {
+    chai
+      .request(server)
+      .get('/home')
+      .redirects(0)
+      .end((err, res) => {
+        expect(res).to.have.status(302);
+        done();
+      });
+  });
+
+//   it('Negative Login', done => {
+//     chai
+//       .request(server)
+//       .post('/login')
+//       .send({username: 'mattfregahgjnd', password: '123' })
+//       .redirects(0)
+//       .end((err, res) => {
+//         expect(res).to.have.status(200);
+//         expect(res).to.not.redirect;
+//         done();
+//       });
+//   });
+
+});
+
+
+
+
 
 });
 
