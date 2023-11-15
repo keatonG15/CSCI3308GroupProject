@@ -127,7 +127,3 @@ it('Should not render the home page without authentication', done => {
 
 
 
-
-
-
-
