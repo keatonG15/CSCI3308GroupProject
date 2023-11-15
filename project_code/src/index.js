@@ -3,6 +3,7 @@
 // *****************************************************
 
 
+
 const express = require('express'); // To build an application server or API
 const app = express();
 const pgp = require('pg-promise')(); // To connect to the Postgres DB from the node server
@@ -13,19 +14,22 @@ const axios = require('axios'); // To make HTTP requests from our server. We'll 
 const path = require('path')
 
 
+
 // *****************************************************
 // <!-- Section 2 : Connect to DB -->
 // *****************************************************
 
 
+
 // database configuration
 const dbConfig = {
- host: 'db', // the database server
- port: 5432, // the database port
- database: process.env.POSTGRES_DB, // the database name
- user: process.env.POSTGRES_USER, // the user account to connect with
- password: process.env.POSTGRES_PASSWORD, // the password of the user account
+  host: 'db', // the database server
+  port: 5432, // the database port
+  database: process.env.POSTGRES_DB, // the database name
+  user: process.env.POSTGRES_USER, // the user account to connect with
+  password: process.env.POSTGRES_PASSWORD, // the password of the user account
 };
+
 
 
 const db = pgp(dbConfig);
