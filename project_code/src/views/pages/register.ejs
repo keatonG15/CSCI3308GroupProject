@@ -1,0 +1,22 @@
+<%- include ('../partials/header') %> 
+
+<main  class="p-3 mb-2  text-black">
+
+  <div class="container">
+    <h1> Register</h1>
+    <form action="/register" method="POST">
+        <label for="username">Username:</label>
+        <input class="form-control" type="text" id="name" name="username" />
+        <br>
+        <label for="password">Password:</label>
+        <input class="form-control" type="text" id="password" name="password" />
+        <br>
+        <input class="btn btn-dark" type="submit" value="Register"/>
+      </form>
+      <p style ="width: 10000px">Already have an account?<a href="/login"> Login</a></p>
+  </div>
+  <div class="col"><%- include ('../partials/message') %></div>
+
+</main>
+
+<%- include ('../partials/footer') %>

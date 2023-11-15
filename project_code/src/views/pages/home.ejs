@@ -1,0 +1,24 @@
+<%- include ('../partials/header') %> 
+
+<main>
+
+  <div class="container text-center">
+    <!-- Home page HTML HERE -->
+    <form action="/logout" method="GET">
+      <input style="float: right;" class="btn btn-dark" type="submit" value="Logout"/>
+    </form>
+    <h1>Welcome <%= username %></h1>
+    <h3>Highscore: <%= highscore%> </h3>
+    <form action="/play" method="GET">
+<<<<<<< HEAD:project_code/src/views/pages/home.ejs
+      <input style ="width: 300px;"class="btn btn-dark" type="submit" value="Play"/>
+=======
+      <input style ="width: 300px;"class="btn btn-primary" type="submit" value="Enter the Tank"/>
+>>>>>>> d6f393ab67d0125bdf40d22b25d9c722b0c1bffb:project_code/views/pages/home.ejs
+    </form>
+  </div>
+  
+
+</main>
+
+<%- include ('../partials/footer') %>
