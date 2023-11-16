@@ -58,6 +58,33 @@ describe('Testing Login APIs', () => {
   
 });
 
+describe('Testing home APIs', () => {
+  
+  // Test case for successful visit to /home
+  it('Should successfully render the home page', done => {
+    // Assuming you need to log in to access the home page
+    // First log in to obtain a session or token
+    chai
+      .request(server)
+      .post('/login')
+      .send({username: 'matt', password: '123' })
+      .redirects(0)
+      .end((err, res) => {
+        expect(res).to.have.status(302);
+        // Then use the session or token to access the home page
+        chai
+        .request(server)
+          .get('/home')
+          .send({username: res.body.username, highscore: res.body.highscore })
+          .redirects(0)
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            // expect(res).to.redirectTo('/home');
+            // expect(res.text).to.include('Welcome'); // Check for some text unique to the home page
+            done();
+          });
+      });
+  });
 
 
 describe('Testing Login APIs', () => {
@@ -92,6 +119,31 @@ describe('Testing Login APIs', () => {
 
 
 
+it('Should not render the home page without authentication', done => {
+  // Assuming you need to log in to access the home page
+  // First log in to obtain a session or token
+  chai
+    .request(server)
+    .post('/login')
+    .send({username: 'wrong', password: 'wrong' })
+    .redirects(0)
+    .end((err, res) => {
+      expect(res).to.have.status(200);
+      // Then use the session or token to access the home page
+      chai
+      .request(server)
+        .get('/home')
+        .send({username: res.body.username, highscore: res.body.highscore })
+        .redirects(0)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.not.redirect;
+          done();
+        });
+    });
+});
 
+
+});
 
 
