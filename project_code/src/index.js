@@ -154,14 +154,15 @@ db.one(getUser)
 
 
 
-const auth = (req, res, next) => {
-  if (!req.session.user) {
-    // Default to login page.
-    return res.redirect('/login');
-  }
-  next();
-};
-app.use(auth);
+// const auth = (req, res, next) => {
+//   if (!req.session.user) {
+//     // Default to login page.
+//     return res.redirect('/login');
+//   }
+//   next();
+// };
+// app.use(auth);
+
 
 app.get('/home', (req, res) => {
  console.log("Testing...", req.body);
