@@ -3,7 +3,7 @@
 <main>
   
   <div class="container text-center">
-    <h3 style="float: left;">Highscore: <%= highscore%> </h3>
+  
     <form action="/logout" method="GET">
       <input style="float: right;" class="btn btn-dark" type="submit" value="Logout"/>
     </form>
@@ -37,6 +37,8 @@
       </div>
       <div class="column" style="border: 0px">
         <h1>Welcome <%= username %>!</h1>
+        <h3 >Highscore: <%= highscore%> </h3>
+    
         <form action="/play" method="GET">
           <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Play"/>
         </form>
