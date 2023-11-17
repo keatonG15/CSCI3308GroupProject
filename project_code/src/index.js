@@ -316,6 +316,12 @@ app.get('/welcome', (req, res) => {
 });
 
 
+app.get('/profile', (req,res) =>{
+  res.render('pages/profile');
+
+ });
+
+
 
 
 // *********************************
@@ -325,4 +331,3 @@ app.get('/welcome', (req, res) => {
 
 
 module.exports = app.listen(3000);
-

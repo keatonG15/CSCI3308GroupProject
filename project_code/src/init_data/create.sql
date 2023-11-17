@@ -4,5 +4,3 @@ password char(60) NOT NULL, --password
 highscore int,
 currentscore int
 );
-
-
