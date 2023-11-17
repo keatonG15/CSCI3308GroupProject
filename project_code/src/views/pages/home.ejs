@@ -10,16 +10,19 @@
     <!-- <form action="/leaderboard" method="GET">
       <input style="float: right;" class="btn btn-dark" type="submit" value="Leaderboard"/>
     </form> -->
-    <br><br><br>
+    <br><br><br> 
     <div class="row">
       <div class="column" style="background-color:rgba(100,100,100, 0.5);">
           <h2>Top 5 Leaderboard</h2>
-
-          <% for(let i =0; i<5; i++){ %>
+     
+         <% for(let i =0; i< size; i++){ %>
             <hr size ="5">
-          <p>Data</p>
+          
+          
+            <div class="row"> <%=i+1%></div> 
+           <p><%=leaders[i].username%>: <%=leaders[i].highscore%></p>
 
-         <% } %>
+         <% } %> 
          
 
       </div>

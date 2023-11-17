@@ -171,8 +171,10 @@ app.get('/home', (req, res) => {
     
 //    console.log('Username: ' + data.username + ' Password: ' + data.password);
 console.log(data);
+console.log("Size", data.length);
   res.render("pages/home.ejs",{
    leaders : data,
+   size: data.length,
    username: req.session.user.username,
  
    highscore: req.session.user.highscore,

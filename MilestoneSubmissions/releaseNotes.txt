@@ -1,5 +1,5 @@
 RELEASE NOTES (DATE,TIME,VERSION) Team 016-001
-======================================================================================================================================================================================
+
 11/09 1:15 PM Release Notes v1.0.0 - alpha
     - Website is up and going where users can create an account and login to start playing the trivia game.
     - Users will be displayed with a question, and answers will appear in red or green indicating right and wrong answers.
@@ -8,26 +8,8 @@ RELEASE NOTES (DATE,TIME,VERSION) Team 016-001
     - Need to figure out how to store high score properly
     - Need to redirect API and make and axios call that displays a new question
     - Better UI and graphic design. 
-======================================================================================================================================================================================
-11/12 4:00 PM Release Notes v1.1.0 -alpha 
-    - Website Functionality added where the button are now jumbled to the so the user doesn't always know what the answer is.
-    - Added Logout functionality to where the user can logout when expected.
-    - Added test cases using chai mocha so developers know that the login functionality is working correctly and that the home page is rendering properly.
-    - Added pictures and better styles.
-    Future Release Goals:
-    - Need to work on the style of the website and make it look nicer for the user.
-    - Find a bootstrap class we can use to implement columns that appeal to the syles and user. 
-    - Make a leaderboard that displays the top 10 highest scores from users.
-    - Make a detalied profile section that holds stats about user. 
-======================================================================================================================================================================================
-11/17 11:00 AM Release Notes v1.1.1 -beta 
 
-
-
-
-
-
-
+11/09 4:00 Release Notes v1.1.0 -alpha 
 
 
 
