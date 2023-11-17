@@ -167,9 +167,9 @@ db.one(getUser)
 app.get('/home', (req, res) => {
  console.log("Testing...", req.body);
 res.render("pages/home.ejs",{
- username: req.body.username,
+ username: req.session.user.username,
  // password: req.session.user.password,
- highscore: req.body.highscore,
+ highscore: req.session.user.highscore,
  // currscore: req.session.user.currentscore,
 });
 
