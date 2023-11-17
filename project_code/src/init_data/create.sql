@@ -15,3 +15,11 @@ allTimeScore int
 
 
 
+currentscore int,
+
+answers_right int,
+answers_wrong int, 
+all_time_score int,
+currency int
+
+);
