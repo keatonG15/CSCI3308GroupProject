@@ -154,26 +154,35 @@ db.one(getUser)
 
 
 
-// const auth = (req, res, next) => {
-//   if (!req.session.user) {
-//     // Default to login page.
-//     return res.redirect('/login');
-//   }
-//   next();
-// };
-// app.use(auth);
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to login page.
+    return res.redirect('/login');
+  }
+  next();
+};
+app.use(auth);
 
 
 app.get('/home', (req, res) => {
- console.log("Testing...", req.body);
-res.render("pages/home.ejs",{
- username: req.session.user.username,
- // password: req.session.user.password,
- highscore: req.session.user.highscore,
- // currscore: req.session.user.currentscore,
+  const query = "SELECT username, highscore FROM users  ORDER BY highscore desc limit 5;";
+  db.any(query) 
+  .then(function (data){
+    
+//    console.log('Username: ' + data.username + ' Password: ' + data.password);
+console.log(data);
+  res.render("pages/home.ejs",{
+   leaders : data,
+   username: req.session.user.username,
+ 
+   highscore: req.session.user.highscore,
+
 });
-
-
+ })
+ .catch(function (err) {
+   res.render("pages/home.ejs", {message: 'No leaderboard available'});
+    
+ });
 
 
 });
@@ -320,6 +329,10 @@ app.get('/profile', (req,res) =>{
   res.render('pages/profile');
 
  });
+
+
+
+ 
 
 
 
