@@ -236,6 +236,8 @@ app.post('/verifyAnswer', (req, res) =>{
 
 console.log("Score", req.session.user.currentscore);
 var newScore = req.session.user.currentscore + 10;
+
+
 //need help getting the asnwer the user selected
 //need help getting the correct answer for comparison
 console.log("Answer" , req.body);
@@ -286,6 +288,8 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
 
 
 //res.redirect('/play');
+
+
 });
 
 
@@ -324,16 +328,21 @@ app.get('/logout', (req,res) =>{
 
 
 
+
 app.get('/welcome', (req, res) => {
  res.json({status: 'success', message: 'Welcome!'});
 });
 
 
+
+
 app.get('/profile', (req,res) =>{
-  res.render('pages/profile');
+// correct answers
+res.render("pages/profile.ejs", {username: req.session.user.username}
+);
 
- });
 
+});
 
 
  
