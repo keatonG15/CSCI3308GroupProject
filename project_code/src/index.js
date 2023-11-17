@@ -97,7 +97,7 @@ res.render('pages/register.ejs');
 app.post('/register', async (req, res) => {
  const username = req.body.username;
  const hash = await bcrypt.hash(req.body.password, 10);
- const query = `INSERT INTO users (username, password, highscore, currentScore) VALUES ('${username}', '${hash}', '0', '0');`;
+ const query = `INSERT INTO users (username, password, highscore, currentScore, answers_right, answers_wrong, all_time_score, currency) VALUES ('${username}', '${hash}', '0', '0', '0', '0', '0', '0');`;
  // console.log('Username: ', username);
  // console.log('Password: ', hash);
 
@@ -238,19 +238,28 @@ console.log("Score", req.session.user.currentscore);
 var newScore = req.session.user.currentscore + 10;
 
 
+
+
 //need help getting the asnwer the user selected
 //need help getting the correct answer for comparison
 console.log("Answer" , req.body);
 //console.log("Correct Answer", results.data.correctAnswer);
 if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
  console.log("Correct!!!")
+ var right = req.session.user.answers_right + 1;
+ var all_time = req.session.user.all_time_score + 10;
+ var money = req.session.user.currency + 1; 
  const updateScore =
-     'update users set currentscore = $1 where username = $2 returning * ;';
+     'update users set currentscore = $1, answers_right = $2, all_time_score = $3, currency = $4 where username = $5 returning * ;';
    // $1 and $2 will be replaced by req.body.name, req.body.username
-   db.any(updateScore, [newScore, req.session.user.username])
+   db.any(updateScore, [newScore, right, all_time, money, req.session.user.username])
    .then(function (data) {
     console.log("asdaskdjnakjask",data)
     req.session.user.currentscore = newScore
+    req.session.user.answers_right = right
+    req.session.user.all_time_score = all_time
+    req.session.user.currency = money
+
      res.redirect('/play');
    })
    // if query execution fails
@@ -262,14 +271,16 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
 
 }else{
  console.log("Incorrect!!!")
+ var wrong = req.session.user.answers_wrong + 1;
  if(req.session.user.currentscore >= req.session.user.highscore){
    const highscore =
-     'update users set highscore = $1 where username = $2 returning * ;';
+     'update users set highscore = $1, answers_wrong = $2 where username = $3 returning * ;';
    // $1 and $2 will be replaced by req.body.name, req.body.username
-   db.any(highscore, [req.session.user.currentscore, req.session.user.username])
+   db.any(highscore, [req.session.user.currentscore, wrong,  req.session.user.username])
    .then(function (data) {
    // console.log("asdaskdjnakjask",data)
     req.session.user.highscore = req.session.user.currentscore;
+    req.session.user.answers_wrong = wrong;
     res.redirect('/gameOver');
    })
    // if query execution fails
@@ -294,7 +305,8 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
 
 
 app.get('/gameOver', (req,res)=>{
-  console.log("Answer", req.session.user.curranswer)
+  console.log(req.session.user)
+  //console.log("Answer", req.session.user.curranswer)
  var reset = 0;
  var tempScore = req.session.user.currentscore;
  const endGame =
@@ -338,7 +350,18 @@ app.get('/welcome', (req, res) => {
 
 app.get('/profile', (req,res) =>{
 // correct answers
-res.render("pages/profile.ejs", {username: req.session.user.username}
+res.render("pages/profile.ejs", 
+{
+username: req.session.user.username,
+password:req.session.user.password,
+highscore:req.session.user.highscore,
+answers_right:req.session.user.answers_right,
+answers_wrong:req.session.user.answers_wrong,
+all_time_score:req.session.user.all_time_score,
+currency:req.session.user.currency
+
+
+}
 );
 
 
