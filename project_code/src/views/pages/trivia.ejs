@@ -68,33 +68,7 @@
     <div class="text-center">
 
 
-      <style>
-        p {
-          text-align: center;
-          font-size: 60px;
-          margin-top: 0px;
-        }
-        </style>
-        </head>
-        
-        <p id="demo"></p>
-        
-        <script>
-        // Set the date we're counting down to
-        let count = 10;
-        const timer = setInterval(function (){
-        count--;
-        document.getElementById("demo").innerHTML = count + "s ";
-        if(count===0){
-        clearInterval(timer);
-        //time up message
-        document.getElementById("demo").innerHTML = "Time's up ";
-      // <a href="/gameOver.ejs"> </a>
-      // <meta http-equiv="refresh" content="3;url="/gameOver.ejs" />
-      window.location = "/gameOver";
-        }
-        },1000);
-        </script>
+
     
       <form action="/verifyAnswer" method="POST">
         <input id="h1"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
@@ -138,12 +112,33 @@
 
   <br>
   <br>
+  <p style="font-size: 100px;"id="demo"></p>
+  <br>
   <p id="correctorno"></p>
+
 </div>
 
-<div class="col"><%- include ('../partials/message') %></div>
-  </div>
+  </head>
+  
+ 
+  
   <script>
+  // Set the date we're counting down to
+  let count = 10;
+  const timer = setInterval(function (){
+  count--;
+  document.getElementById("demo").innerHTML = count + "s ";
+  if(count===0){
+  clearInterval(timer);
+  //time up message
+  document.getElementById("demo").innerHTML = "Time's up ";
+// <a href="/gameOver.ejs"> </a>
+// <meta http-equiv="refresh" content="3;url="/gameOver.ejs" />
+window.location = "/gameOver";
+  }
+  },1000);
+  </script>
+   <script>
     function checkAnswer(answer, correctAnswer){
       console.log(answer);
       console.log(correctAnswer);
@@ -157,6 +152,11 @@
 
     }
   </script>
+
+<div class="col"><%- include ('../partials/message') %></div>
+
+  </div>
+ 
 
 </main>
 
