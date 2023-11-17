@@ -154,26 +154,37 @@ db.one(getUser)
 
 
 
-// const auth = (req, res, next) => {
-//   if (!req.session.user) {
-//     // Default to login page.
-//     return res.redirect('/login');
-//   }
-//   next();
-// };
-// app.use(auth);
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to login page.
+    return res.redirect('/login');
+  }
+  next();
+};
+app.use(auth);
 
 
 app.get('/home', (req, res) => {
- console.log("Testing...", req.body);
-res.render("pages/home.ejs",{
- username: req.body.username,
- // password: req.session.user.password,
- highscore: req.body.highscore,
- // currscore: req.session.user.currentscore,
+  const query = "SELECT username, highscore FROM users  ORDER BY highscore desc limit 5;";
+  db.any(query) 
+  .then(function (data){
+    
+//    console.log('Username: ' + data.username + ' Password: ' + data.password);
+console.log(data);
+console.log("Size", data.length);
+  res.render("pages/home.ejs",{
+   leaders : data,
+   size: data.length,
+   username: req.session.user.username,
+ 
+   highscore: req.session.user.highscore,
+
 });
-
-
+ })
+ .catch(function (err) {
+   res.render("pages/home.ejs", {message: 'No leaderboard available'});
+    
+ });
 
 
 });
@@ -198,6 +209,7 @@ axios({
  .then(results => {
   // var score = 0;
    //console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+   req.session.user.curranswer = results.data[0].correctAnswer;
    if(req.session.user.currentscore > 0){
    res.render("pages/trivia.ejs",
    {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data, message: `Correct! Nice Job!`});
@@ -254,7 +266,7 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
    // $1 and $2 will be replaced by req.body.name, req.body.username
    db.any(highscore, [req.session.user.currentscore, req.session.user.username])
    .then(function (data) {
-    console.log("asdaskdjnakjask",data)
+   // console.log("asdaskdjnakjask",data)
     req.session.user.highscore = req.session.user.currentscore;
     res.redirect('/gameOver');
    })
@@ -278,6 +290,7 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
 
 
 app.get('/gameOver', (req,res)=>{
+  console.log("Answer", req.session.user.curranswer)
  var reset = 0;
  var tempScore = req.session.user.currentscore;
  const endGame =
@@ -285,9 +298,9 @@ app.get('/gameOver', (req,res)=>{
    // $1 and $2 will be replaced by req.body.name, req.body.username
    db.any(endGame, [reset, req.session.user.username])
    .then(function (data) {
-    console.log("asdaskdjnakjask",data)
+   // console.log("aaa", req.session.user.currAnswer);
     req.session.user.currentscore = reset
-    res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore});
+    res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
    })
    // if query execution fails
    // send error message
@@ -320,6 +333,10 @@ app.get('/profile', (req,res) =>{
   res.render('pages/profile');
 
  });
+
+
+
+ 
 
 
 
