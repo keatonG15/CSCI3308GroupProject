@@ -95,7 +95,6 @@ describe('Testing home APIs', () => {
 
 
 
-
 it('Should not render the home page without authentication', done => {
  // Assuming you need to log in to access the home page
  // First log in to obtain a session or token
@@ -124,10 +123,3 @@ it('Should not render the home page without authentication', done => {
 
 
 });
-
-
-
-
-
-
-
