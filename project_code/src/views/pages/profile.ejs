@@ -56,6 +56,9 @@
       </style>
     </head>
     <body>
+      <form action="/home" method="GET">
+        <input style = "float: left;"class="btn btn-dark" type="submit" value="Home"/>
+      </form>
       <div class="profile">
         <div class="profile-header">
           <img src="path/to/profile-picture.jpg" alt="Profile Picture" style="border-radius: 50%; width: 150px; height: 150px;">
@@ -68,10 +71,9 @@
           <h2> Answers right: <%= answers_right%> </h2>
          
           <h2> Answers wrong: <%=answers_wrong%>  </h2>
-          <ul>
-            <li>Username: <%= username %> </li>
-            <li>Currency: <%= currency %> </li>
+          <h2>All Time score: <%=all_time_score%></h2>
             
+          <h2>Currency: <%=currency%></h2>
         </div>
       </div>
     </body>

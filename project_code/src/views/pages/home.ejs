@@ -5,6 +5,9 @@
   <form action="/logout" method="GET">
     <input style=" float: right;" class="btn btn-dark" type="submit" value="Logout"/>
   </form>
+  <form action="/profile" method="GET">
+    <input style="float: right;" class="btn btn-dark" type="submit" value="Profile"/>
+  </form>
     <h1 style="text-align: center;">Welcome to Think Tank Trivia</h1>
     
 
@@ -42,7 +45,7 @@
         <h3 >Highscore: <%= highscore%> </h3>
     
         <form action="/play" method="GET">
-          <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Play"/>
+          <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>
         </form>
       </div>
     <!-- Home page HTML HERE -->
@@ -50,9 +53,7 @@
     
   </div>
 
-  <form action="/profile" method="GET">
-    <input style="float: right;" class="btn btn-primary" type="submit" value="profile"/>
-  </form>
+
   
   
 
