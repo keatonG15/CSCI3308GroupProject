@@ -107,7 +107,7 @@ app.post('/register', async (req, res) => {
    res.redirect('/login');
  })
  .catch((error) =>{
-   //res.render('/register', {message: `Username already exists`, error: true})
+   res.render('/register', {message: `Username already exists`, error: true})
 
 
    res.redirect('/register');
@@ -380,9 +380,26 @@ app.get('/rewards', (req,res) =>{
   
   }
   );
-  
-  
+
   });
+
+  app.post('/buyReward', (req, res) => {
+    const { username, reward, cost } = req.session.user;
+
+    // SQL to update the reward count and subtract the cost
+    const sql = `
+        UPDATE users 
+        SET ${reward} = ${reward} + 1, currency = currency - ${cost} 
+        WHERE username = ${username} AND currency >= ${cost}
+    `;
+
+    db.query(sql, [req.session.user.username], (err, result) => {
+        if (err) res.status(500).send({ message: 'Error processing request' });
+        else if (result.affectedRows === 0) res.status(400).send({ message: 'Not enough currency or invalid user' });
+        else res.send({ message: 'Reward purchased successfully' });
+    });
+});
+
   
 
  

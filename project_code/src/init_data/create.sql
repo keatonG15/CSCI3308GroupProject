@@ -11,9 +11,9 @@ answers_wrong int,
 all_time_score int,
 currency int,
   --power ups / rewards
-2x_points int,
+points_2x int,
 Revive int,
-3x_points int,
+points_3x int,
 bomb int,
-2x_bomb int
+bomb_2x int
 );

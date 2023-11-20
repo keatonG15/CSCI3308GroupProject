@@ -1,6 +1,9 @@
 <%- include('../partials/header') %>
 
 <main>
+  <form action="/home" method="GET">
+    <input style = "float: right;"class="btn btn-dark" type="submit" value="Home"/>
+  </form>
   <div class="profile">
     <div class="profile-header">
       <h1>Rewards Store</h1>
@@ -47,16 +50,26 @@
     </div>
   </div>
 
-  <script>
-    function buyReward(reward, cost) {
-      // Here you will need to add the logic to handle the purchase
-      // This might involve making an AJAX call to your server to update the user's currency
-      // and adding the reward to their account
-      alert(`Attempting to buy ${reward} for ${cost} currency.`);
-      // Example: Make an AJAX call to server to process the purchase
-      // ...
-    }
-  </script>
 </main>
+
+<script>
+  function buyReward(reward, cost) {
+    const username = '<%= username %>'; // Replace with actual username variable
+
+    fetch('/buyReward', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, reward, cost })
+    })
+    .then(response => response.text())
+    .then(message => {
+      alert(message);
+      if (message === 'Reward purchased successfully') {
+        window.location.reload(); // Reload the page to update currency display
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  }
+</script>
 
 <%- include('../partials/footer') %>
