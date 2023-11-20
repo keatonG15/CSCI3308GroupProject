@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+
+<main>
+  <div class="profile">
+    <div class="profile-header">
+      <h1>Rewards Store</h1>
+      <p>Use your currency to buy amazing rewards!</p>
+    </div>
+    <div class="profile-details">
+      <p>You have <strong><%= currency %></strong> currency available.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Reward</th>
+            <th>Cost</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2x Points</td>
+            <td>5 Currency</td>
+            <td><button onclick="buyReward('2x Points', 5)">Buy</button></td>
+          </tr>
+          <tr>
+            <td>Revive</td>
+            <td>20 Currency</td>
+            <td><button onclick="buyReward('Revive', 20)">Buy</button></td>
+          </tr>
+          <tr>
+            <td>3x Points</td>
+            <td>7 Currency</td>
+            <td><button onclick="buyReward('3x Points', 7)">Buy</button></td>
+          </tr>
+          <tr>
+            <td>Bomb (Explode 1 Question)</td>
+            <td>3 Currency</td>
+            <td><button onclick="buyReward('Bomb', 3)">Buy</button></td>
+          </tr>
+          <tr>
+            <td>Bomb 2x (Explodes Two Questions)</td>
+            <td>5 Currency</td>
+            <td><button onclick="buyReward('Bomb 2x', 5)">Buy</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function buyReward(reward, cost) {
+      // Here you will need to add the logic to handle the purchase
+      // This might involve making an AJAX call to your server to update the user's currency
+      // and adding the reward to their account
+      alert(`Attempting to buy ${reward} for ${cost} currency.`);
+      // Example: Make an AJAX call to server to process the purchase
+      // ...
+    }
+  </script>
+</main>
+
+<%- include('../partials/footer') %>

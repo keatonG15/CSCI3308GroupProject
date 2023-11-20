@@ -226,9 +226,9 @@ axios({
 });
 
 
-// app.get('/verifyAnswer', (req,res)=>{
-// res.redirect('/verifyAnswer');
-// });
+app.get('/verifyAnswer', (req,res)=>{
+res.redirect('/verifyAnswer');
+});
 
 
 app.post('/verifyAnswer', (req, res) =>{
@@ -363,10 +363,27 @@ currency:req.session.user.currency
 
 }
 );
-
-
 });
 
+app.get('/rewards', (req,res) =>{
+  // correct answers
+  res.render("pages/rewards.ejs", 
+  {
+  username: req.session.user.username,
+  password:req.session.user.password,
+  highscore:req.session.user.highscore,
+  answers_right:req.session.user.answers_right,
+  answers_wrong:req.session.user.answers_wrong,
+  all_time_score:req.session.user.all_time_score,
+  currency:req.session.user.currency
+  
+  
+  }
+  );
+  
+  
+  });
+  
 
  
 
