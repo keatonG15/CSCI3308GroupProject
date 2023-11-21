@@ -98,7 +98,7 @@ app.post('/register', async (req, res) => {
  const username = req.body.username;
  const hash = await bcrypt.hash(req.body.password, 10);
 
- const query = `INSERT INTO users (username, password, highscore, currentScore, answers_right, answers_wrong, all_time_score, currency, profile_pic) VALUES ('${username}', '${hash}', '0', '0', '0', '0', '0', '0', 'img/prof0.png');`;
+ const query = `INSERT INTO users (username, password, highscore, currentScore, answers_right, answers_wrong, all_time_score, currency, profile_pic, lives, last_right) VALUES ('${username}', '${hash}', '0', '0', '0', '0', '0', '0', 'img/prof0.png', '3', '0');`;
  // console.log('Username: ', username);
  // console.log('Password: ', hash);
  
@@ -213,12 +213,19 @@ axios({
   // var score = 0;
    //console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
    req.session.user.curranswer = results.data[0].correctAnswer;
-   if(req.session.user.currentscore > 0){
+   if(req.session.user.currentscore > 0 && req.session.user.last_right == 1){
    res.render("pages/trivia.ejs",
-   {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data, message: `Correct! Nice Job!`});
+   {highscore: req.session.user.highscore,
+    currscore: req.session.user.currentscore, 
+    lives: req.session.user.lives,
+    trivia: results.data, 
+    message: `Correct! Nice Job!`});
    }else{
      res.render("pages/trivia.ejs",
-   {highscore: req.session.user.highscore, currscore: req.session.user.currentscore, trivia: results.data});
+   {highscore: req.session.user.highscore, 
+    currscore: req.session.user.currentscore,
+    lives: req.session.user.lives, 
+    trivia: results.data});
   
    }
  })
@@ -271,15 +278,16 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
  var all_time = req.session.user.all_time_score + 10;
  var money = req.session.user.currency + 1; 
  const updateScore =
-     'update users set currentscore = $1, answers_right = $2, all_time_score = $3, currency = $4 where username = $5 returning * ;';
+     'update users set currentscore = $1, answers_right = $2, all_time_score = $3, currency = $4, last_right = $5 where username = $6 returning * ;';
    // $1 and $2 will be replaced by req.body.name, req.body.username
-   db.any(updateScore, [newScore, right, all_time, money, req.session.user.username])
+   db.any(updateScore, [newScore, right, all_time, money, '1', req.session.user.username])
    .then(function (data) {
     console.log("asdaskdjnakjask",data)
     req.session.user.currentscore = newScore
     req.session.user.answers_right = right
     req.session.user.all_time_score = all_time
     req.session.user.currency = money
+    req.session.user.last_right = '1';
 
      res.redirect('/play');
    })
@@ -293,11 +301,28 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
 }else{
  console.log("Incorrect!!!")
  var wrong = req.session.user.answers_wrong + 1;
+ var life = req.session.user.lives - 1;
+
+ //check for highscore
+ if(life > 0){
+  const setlives = 
+  `update users set lives = $1, last_right = $2 where username = $3 returning * ;`;
+  db.any(setlives, [life , '0', req.session.user.username])
+   .then(function (data) {
+    req.session.user.lives = life;
+    req.session.user.last_right = '0';
+    res.redirect('/play');
+   })
+   .catch(function (err) {
+    return console.log(err);
+  });
+
+ }else{
  if(req.session.user.currentscore >= req.session.user.highscore){
    const highscore =
-     'update users set highscore = $1, answers_wrong = $2 where username = $3 returning * ;';
+     'update users set highscore = $1, answers_wrong = $2 where username = $4 returning * ;';
    // $1 and $2 will be replaced by req.body.name, req.body.username
-   db.any(highscore, [req.session.user.currentscore, wrong,  req.session.user.username])
+   db.any(highscore, [req.session.user.currentscore, wrong, '3',  req.session.user.username])
    .then(function (data) {
    // console.log("asdaskdjnakjask",data)
     req.session.user.highscore = req.session.user.currentscore;
@@ -309,9 +334,11 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
    .catch(function (err) {
      return console.log(err);
    });
+   //no highscore
  }else{
    res.redirect('/gameOver');
  }
+}
  }
 
 
@@ -330,13 +357,16 @@ app.get('/gameOver', (req,res)=>{
   //console.log("Answer", req.session.user.curranswer)
  var reset = 0;
  var tempScore = req.session.user.currentscore;
+
+
  const endGame =
-     'update users set currentscore = $1 where username = $2 returning * ;';
+     'update users set currentscore = $1, lives = $2 where username = $3 returning * ;';
    // $1 and $2 will be replaced by req.body.name, req.body.username
-   db.any(endGame, [reset, req.session.user.username])
+   db.any(endGame, [reset, '3', req.session.user.username])
    .then(function (data) {
    // console.log("aaa", req.session.user.currAnswer);
-    req.session.user.currentscore = reset
+    req.session.user.currentscore = reset,
+    req.session.user.lives = '3';
     res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
    })
    // if query execution fails

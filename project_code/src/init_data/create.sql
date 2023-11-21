@@ -6,6 +6,8 @@ highscore int,
 currentscore int,
 curranswer CHAR(60),
 profile_pic char(60),
+lives int,
+last_right int,
 --answers / currency
 answers_right int,
 answers_wrong int, 
