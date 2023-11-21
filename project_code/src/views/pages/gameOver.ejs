@@ -10,26 +10,35 @@
 <%- include ('../partials/navbar') %> 
 <style>
   body{
-    background-image: none;
-    background-color: rgb(179, 39, 29);
+    
+      background-image: url('img/gameOverBg.png');
+      
+  
+    
   }
   #navbarToggleExternalContent{
         background-color:rgb(179, 39, 29);
         color: white;
     }
     .navbar{
-        background-color: rgb(179, 39, 29);
+        background-color: transparent;
         color: white;
     }
     .btn .navbar{
       color:black;
+    }
+    h1{
+      color: white;
+    }
+    h3{
+      color: white;
     }
 </style>
 <main >
 
   <div class="container text-center" >
     <!-- Home page HTML HERE -->
-   
+   <div style="display: inline-block; background-color: rgb(0,0,0,0.5);">
     <%if(currscore >= highscore){ %>
         <h1 id="newHS">New Highscore!</h1>
         <h3>Score: <%= currscore%> </h3>
@@ -39,12 +48,17 @@
         <h3>Highscore: <%=highscore%></h3>
         <% } %>
    
-        <h3> Correct Answer was '<%=correctanswer%>'</h3>
+        <h3>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Correct Answer was '<%=correctanswer%>'
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </h3>
         <form action="/play" method="GET">
           <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>
         </form>
-   
-    
+        <br>
+      </div>
+    <br>
   </div>
   
 

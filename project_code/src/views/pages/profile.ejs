@@ -3,7 +3,7 @@
 
 <main>
 
-
+  <%- include ('../partials/navbar') %> 
 
     <!DOCTYPE html>
     <html lang="en">
@@ -15,20 +15,25 @@
         margin: 0 auto; /* Added */
         float: none; /* Added */
         margin-bottom: 10px; /* Added */
-        background-color: rgb(93, 125, 142);
-        
+        background-color: rgb(87,187,226);
         
         }
         
         body{
-          background-image: none;
-          background-color: lightblue;
-       
+          background-image: url('img/homeBackground.png');
+         
         }
+        .navbar{
+          background-color: transparent;
+        }
+        #navbarToggleExternalContent{
+      background-color: rgb(87,187,226);
+  
+      }
       </style>
     </head>
-    <body ">
-      <%- include ('../partials/navbar') %> 
+  
+    
       <br>
       <div class="container" style="text-align: center;">
         <!-- THE REST OF YOUR HTML CODE GOES HERE -->
@@ -70,7 +75,7 @@
         </div>
       
      
-    </body>
-    </html>
+
+
     
 </main>
