@@ -1,0 +1,54 @@
+<%- include ('../partials/header') %> 
+<style>
+ .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        background-color: lightblue;
+        
+        }
+        
+        body{
+            text-align: center;
+          background-image: none;
+        
+        }
+
+</style>
+<main >
+   
+    <img src="<%=profile_pic%>" width = '100px'>
+
+    <div class="container">
+        <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+          <!--Hobby Cards-->
+         
+          <div id="eventcards">
+            <div class="row">
+             
+              <% for (let i = 0; i < 4; i++) { %>
+                <!--Event Card:-->
+                <div class="col-sm " id="event-card-">
+                  <div class="card">
+                    <div class="card-body rounded">
+                    
+                     <img src="img/prof<%=i%>.png"  width = '100px'>
+                     <form action="/change_pic_post" method="POST">
+                        <input id="h1"  hidden type="text" name="selection" value="img/prof<%=i%>.png"/>
+                        <button  id="A1"  class="btn btn-dark" type="submit" >Select</button>
+                      </form> <!-- src = "<= events[i].images[0].url%>" -->
+                      <br><br>
+                     
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+        </div>
+      </div>
+
+  
+
+</main>
+
+<%- include ('../partials/footer') %>

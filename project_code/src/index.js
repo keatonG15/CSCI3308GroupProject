@@ -97,10 +97,11 @@ res.render('pages/register.ejs');
 app.post('/register', async (req, res) => {
  const username = req.body.username;
  const hash = await bcrypt.hash(req.body.password, 10);
- const query = `INSERT INTO users (username, password, highscore, currentScore, answers_right, answers_wrong, all_time_score, currency) VALUES ('${username}', '${hash}', '0', '0', '0', '0', '0', '0');`;
+
+ const query = `INSERT INTO users (username, password, highscore, currentScore, answers_right, answers_wrong, all_time_score, currency, profile_pic) VALUES ('${username}', '${hash}', '0', '0', '0', '0', '0', '0', 'img/prof0.png');`;
  // console.log('Username: ', username);
  // console.log('Password: ', hash);
-
+ 
 
  db.none(query)
    .then(()=>{
@@ -117,6 +118,8 @@ app.post('/register', async (req, res) => {
 
 
 });
+
+
 
 
 app.post('/login',  (req,res)=>{
@@ -230,6 +233,24 @@ app.get('/verifyAnswer', (req,res)=>{
 res.redirect('/verifyAnswer');
 });
 
+app.get('/change_pic', (req,res)=>{
+
+res.render('pages/change_pic.ejs',{
+  profile_pic: req.session.user.profile_pic
+});
+});
+
+app.post('/change_pic_post', (req,res)=>{
+  const query =
+  'update users set profile_pic = $1 where username = $2 returning * ;';
+// $1 and $2 will be replaced by req.body.name, req.body.username
+db.any(query, [req.body.selection, req.session.user.username])
+.then(function (data) {
+  req.session.user.profile_pic = req.body.selection;
+  res.redirect('/profile');
+
+});
+});
 
 app.post('/verifyAnswer', (req, res) =>{
 
@@ -358,7 +379,8 @@ highscore:req.session.user.highscore,
 answers_right:req.session.user.answers_right,
 answers_wrong:req.session.user.answers_wrong,
 all_time_score:req.session.user.all_time_score,
-currency:req.session.user.currency
+currency:req.session.user.currency,
+profile_pic: req.session.user.profile_pic
 
 
 }
@@ -399,6 +421,7 @@ app.get('/rewards', (req,res) =>{
         else res.send({ message: 'Reward purchased successfully' });
     });
 });
+
 
   
 

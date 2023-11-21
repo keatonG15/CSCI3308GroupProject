@@ -7,19 +7,29 @@
   }
 
 </script> -->
+<%- include ('../partials/navbar') %> 
 <style>
   body{
     background-image: none;
     background-color: rgb(179, 39, 29);
   }
+  #navbarToggleExternalContent{
+        background-color:rgb(179, 39, 29);
+        color: white;
+    }
+    .navbar{
+        background-color: rgb(179, 39, 29);
+        color: white;
+    }
+    .btn .navbar{
+      color:black;
+    }
 </style>
 <main >
 
   <div class="container text-center" >
     <!-- Home page HTML HERE -->
-    <form action="/home" method="GET">
-      <input class="btn btn-dark" type="submit" value="Home"/>
-    </form>
+   
     <%if(currscore >= highscore){ %>
         <h1 id="newHS">New Highscore!</h1>
         <h3>Score: <%= currscore%> </h3>
@@ -28,7 +38,7 @@
         <h3>Score: <%= currscore%> </h3>
         <h3>Highscore: <%=highscore%></h3>
         <% } %>
-        <br>
+   
         <h3> Correct Answer was '<%=correctanswer%>'</h3>
         <form action="/play" method="GET">
           <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>

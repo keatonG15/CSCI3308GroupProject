@@ -5,6 +5,7 @@ password char(60) NOT NULL, --password
 highscore int,
 currentscore int,
 curranswer CHAR(60),
+profile_pic char(60),
 --answers / currency
 answers_right int,
 answers_wrong int, 
@@ -17,3 +18,4 @@ points_3x int,
 bomb int,
 bomb_2x int
 );
+

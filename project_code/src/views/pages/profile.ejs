@@ -11,71 +11,63 @@
       <meta charset="UTF-8">
       <title>User Profile</title>
       <style>
-        /* Basic styling for demonstration purposes */
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #f7f7f7;
-          margin: 0;
-          padding: 20px;
+        .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        background-color: lightblue;
+        
         }
-        .profile {
-          max-width: 800px;
-          margin: 0 auto;
-          background-color: #fff;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          padding: 20px;
-          border-radius: 8px;
-        }
-        .profile-header {
-          text-align: center;
-          margin-bottom: 20px;
-        }
-        .profile-header h1 {
-          color: #333;
-          margin-bottom: 5px;
-        }
-        .profile-header p {
-          color: #666;
-        }
-        .profile-details {
-          border-top: 1px solid #ddd;
-          padding-top: 20px;
-        }
-        .profile-details h2 {
-          color: #333;
-          margin-bottom: 15px;
-        }
-        .profile-details ul {
-          list-style: none;
-          padding: 0;
-        }
-        .profile-details li {
-          margin-bottom: 8px;
-          color: #666;
+        
+        body{
+          background-image: none;
+       
         }
       </style>
     </head>
-    <body>
-      <form action="/home" method="GET">
-        <input style = "float: left;"class="btn btn-dark" type="submit" value="Home"/>
-      </form>
-      <div class="profile">
-        <div class="profile-header">
-          <img src="path/to/profile-picture.jpg" alt="Profile Picture" style="border-radius: 50%; width: 150px; height: 150px;">
-          <h1><%= username %>s' profile </h1>
+    <body ">
+      <%- include ('../partials/navbar') %> 
+      <br>
+      <div class="container" style="text-align: center;">
+        <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+          <!--Hobby Cards-->
          
-        </div>
-        <div class="profile-details">
-          <h2>High Score: <%= highscore%> </h2>
+          <div id="eventcards">
+            <div class="row">
+             
+
+                <!--Event Card:-->
+                <div class="col-sm " id="event-card-">
+                  <div class="card " style="width: 1000px;">
+                    <div class="card-body rounded">
+                    
+                      <img src="<%=profile_pic%>" style="border-radius: 50%; width: 150px; height: 150px;">
+                      <h1><%= username %>s' profile </h1>
+                      <form action="/change_pic" method="GET">
+                      <input class="btn btn-dark" type="submit" value="Change Profile Pic"/>
+                      </form>
+                      <br>
+                     
          
-          <h2> Answers right: <%= answers_right%> </h2>
+                    
+                      <h2>High Score: <%= highscore%> </h2>
          
-          <h2> Answers wrong: <%=answers_wrong%>  </h2>
-          <h2>All Time score: <%=all_time_score%></h2>
+                      <h2> Answers right: <%= answers_right%> </h2>
+         
+                      <h2> Answers wrong: <%=answers_wrong%>  </h2>
+                      <h2>All Time score: <%=all_time_score%></h2>
             
-          <h2>Currency: <%=currency%></h2>
+                      <h2>Currency: <%=currency%></h2>
+                    </div>
+                     
+                  </div>
+                </div>
+              </div>
+            
+            </div>
         </div>
-      </div>
+      
+     
     </body>
     </html>
     
