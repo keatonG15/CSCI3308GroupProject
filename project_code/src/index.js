@@ -108,13 +108,9 @@ app.post('/register', async (req, res) => {
    res.redirect('/login');
  })
  .catch((error) =>{
-   res.render('/register', {message: `Username already exists`, error: true})
+  res.render('pages/register.ejs', {message: 'Username already exists', error: true});
 
-
-   res.redirect('/register');
-
-
- });
+});
 
 
 });
@@ -168,7 +164,7 @@ app.use(auth);
 
 
 app.get('/home', (req, res) => {
-  const query = "SELECT username, highscore FROM users  ORDER BY highscore desc limit 5;";
+  const query = "SELECT username, highscore, profile_pic FROM users ORDER BY highscore desc limit 5;";
   db.any(query) 
   .then(function (data){
     
@@ -181,6 +177,7 @@ console.log("Size", data.length);
    username: req.session.user.username,
  
    highscore: req.session.user.highscore,
+   profile_pic: req.session.user.profile_pic
 
 });
  })
@@ -306,11 +303,12 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
  //check for highscore
  if(life > 0){
   const setlives = 
-  `update users set lives = $1, last_right = $2 where username = $3 returning * ;`;
-  db.any(setlives, [life , '0', req.session.user.username])
+  `update users set lives = $1, last_right = $2, answers_wrong = $3 where username = $4 returning * ;`;
+  db.any(setlives, [life , '0', wrong, req.session.user.username])
    .then(function (data) {
     req.session.user.lives = life;
     req.session.user.last_right = '0';
+    req.session.user.answers_wrong = wrong;
     res.redirect('/play');
    })
    .catch(function (err) {
@@ -336,7 +334,15 @@ if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
    });
    //no highscore
  }else{
-   res.redirect('/gameOver');
+  const update_wrong =
+  'update users set answers_wrong = $1 where username = $2 returning * ;';
+  db.any(update_wrong, [ wrong, req.session.user.username])
+   .then(function (data) {
+    req.session.user.answers_wrong = wrong;
+    res.redirect('/gameOver');
+   });
+
+   
  }
 }
  }

@@ -15,6 +15,9 @@
       background-color: rgb(87,187,226);
   
       }
+      td{
+        font-size: 25px;
+      }
   </style>
   
 
@@ -30,25 +33,31 @@
       <div class="column" style="background-color:rgba(100,100,100, 0.5);">
         <h2>Top 5 Leaderboard</h2>
         <table class ="table">
-
+          <tbody>
       
          <% for(let i =0; i< size; i++){ %>
-          <tbody>
+      
             <tr>
             
-         <td scope ="row"> <%=i+1%></td>
+         <td scope ="row" width = '200px'> <%=i+1%></td>
         
-           <td><%=leaders[i].username%></td>
+           <td width = 100px><img src="<%=leaders[i].profile_pic%>" width = "50px"></td>
+           <td> <%=leaders[i].username%></td>
+         
+          
         <td><%=leaders[i].highscore%></td>
+        
             
             </tr>
-            
+        
 
-          </tbody>
+          
 
          <% } %> 
-       
+        </tbody>
         </table>
+        <br>
+        <button class="btn btn-dark" onclick="showInstructions()">How to Play</button>
       </div>
       <div class="column" style="border: 0px">
         <h1>Welcome <%= username %>!</h1>
@@ -57,8 +66,32 @@
         <form action="/play" method="GET">
           <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>
         </form>
+        <br><br>
+        <div id="instructions"  style="display: inline-block; background-color: rgba(100,100,100, 0.5); text-align: left; visibility: hidden;">
+          <h3 style="text-align: center;">How to Play</h3>
+          <ul>
+            <li>Answer the questions before the time runs out!</li>
+            <br>
+            <li>You have three lives, one missed question = 1 missed life</li>
+            <br>
+            <li>1 correct answer = +10pts</li>
+            <br>
+            <li>If you run out of time the game automatically ends</li>
+            <br>
+            <li>See the 'Profile' page in the dropdown menu to see your stats!</li>
+            <br>
+            <li>Get a higher and higher score until you've made it on the leaderboard!</li>
+            <br>
+    
+          </ul>
+    
+    
+    
+    
+        </div>
       </div>
     <!-- Home page HTML HERE -->
+   
    
     
   </div>
@@ -68,5 +101,15 @@
   
 
 </main>
+<script>
+function showInstructions(){
+  const instructions = document.getElementById('instructions');
+  instructions.style.visibility = 'visible';
+
+
+}
+
+
+</script>
 
 <%- include ('../partials/footer') %>
