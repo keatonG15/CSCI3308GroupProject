@@ -1,0 +1,66 @@
+USER ACCEPTANCE TESTING
+======================================================================================================================================================================================
+
+1. USER SHOULD BE ABLE TO LOGIN WITH CREDENTIALS
+
+A user will not be able to login without the mandatory fields:
+    - username
+    - password
+
+For testing we will need to register the following credentials: 
+    username: matt
+    password: 123
+
+We will be using the mocha enviornment for testing with a describe titled: 'Testing Login APIs'
+The it will be: 'Successfull Login'
+
+In are test case will will send the above credentials to the '/login'.
+
+When test case works then we will expect the status to have a 302.
+With our game we also expect to redirect to the '/home' page so the user can get started with the game.  
+
+Our test results will come up as passing when 
+
+This test case that we are using insures that users that have a registered account will be properly loaded and redirected to the home page. 
+
+======================================================================================================================================================================================
+
+2. USER SHOULD NOT BE ABLE TO LOGIN WITH INVALID CREDENTIALS
+
+A user will not be able to login with inccorrect inputs in the mandatory fields:
+    -username
+    -password
+
+For Testing we can use any combiation of username and password that is not already registered to the database. 
+
+We will be using the mocha enviornment for testing with a describe titled: 'Testing Login APIs'
+The it will be: 'Negative Login'
+
+For our example we sent the following credentials because they were not registered.
+    username: mattfregahgjnd         
+    password: 123
+
+Since we are expecting a failed login we must return a 200 status and our response is to NOT REDIRECT. This is because we are throwing an error message on the login page
+to tell users they have the wrong credentials. If the page redirects this is incorrect because we do not want unathourized users to enter and start playing the game because 
+this would cause a lot of errors and flaws
+
+Overall, this test case we are insuring that when logged in with incorrect credentials we tell the user and stay on the login. 
+
+======================================================================================================================================================================================
+
+3. USER SHOULD SUCCESSFULLY RENDER HOME PAGE WHEN LOGGED IN
+
+In this test case we are using what we did above to login and then we are checking that the username and highscore match and the home page renders
+
+Just like we did in test case 1 we are going to need to use the following credentials to send to the API 
+    username: matt
+    password: 123
+
+We will be using the mocha enviornment for testing with a describe titled: 'Testing home APIs'
+The it will be: 'Should successfully render the home page'
+
+Then within the first chai we create another one that gets the home page and sends the res.body.username and res.body.highscore.
+If these variables match then we expect the server to have a 200 (successful status) 
+
+We expect that this has a 200 status as it is successfully rendered. The main goal of this test case is to make sure that the home page is successfully rendered when logged in.
+This insures that after login the user encounters no errors when trying to play the game after login.
