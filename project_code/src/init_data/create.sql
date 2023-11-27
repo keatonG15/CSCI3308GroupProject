@@ -15,9 +15,7 @@ all_time_score int,
 currency int,
   --power ups / rewards
 points_2x int,
-Revive int,
-points_3x int,
-bomb int,
-bomb_2x int
+points_3x int
+
 );
 
