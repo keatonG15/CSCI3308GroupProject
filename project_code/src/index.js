@@ -444,17 +444,31 @@ app.get('/rewards', (req,res) =>{
   app.post('/buyReward', (req, res) => {
     const { username, reward, cost } = req.session.user;
 
+    // Check if the reward is a valid column name to prevent SQL Injection
+    const validRewards = ['points_2x', 'points_3x']; // Add other valid reward names here
+    if (!validRewards.includes(reward)) {
+        return res.status(400).send({ message: 'Invalid reward type' });
+    }
+
     // SQL to update the reward count and subtract the cost
+    // Using parameterized queries for security
     const sql = `
         UPDATE users 
-        SET ${reward} = ${reward} + 1, currency = currency - ${cost} 
-        WHERE username = ${username} AND currency >= ${cost}
+        SET ${reward} = ${reward} + 1, currency = currency - ? 
+        WHERE username = ? AND currency >= ?
     `;
 
-    db.query(sql, [req.session.user.username], (err, result) => {
-        if (err) res.status(500).send({ message: 'Error processing request' });
-        else if (result.affectedRows === 0) res.status(400).send({ message: 'Not enough currency or invalid user' });
-        else res.send({ message: 'Reward purchased successfully' });
+    db.query(sql, [cost, username, cost], (err, result) => {
+        if (err) {
+            console.error(err); // Log the error for debugging
+            res.status(500).send({ message: 'Error processing request' });
+        }
+        else if (result.affectedRows === 0) {
+            res.status(400).send({ message: 'Not enough currency or invalid user' });
+        }
+        else {
+            res.send({ message: 'Reward purchased successfully' });
+        }
     });
 });
 
