@@ -262,14 +262,12 @@ app.post('/verifyAnswer', (req, res) =>{
 console.log("Score", req.session.user.currentscore);
 var newScore = req.session.user.currentscore + 10;
 
-
-
-
 //need help getting the asnwer the user selected
 //need help getting the correct answer for comparison
 console.log("Answer" , req.body);
 //console.log("Correct Answer", results.data.correctAnswer);
 if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
+
  console.log("Correct!!!")
  var right = req.session.user.answers_right + 1;
  var all_time = req.session.user.all_time_score + 10;
