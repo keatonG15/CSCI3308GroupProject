@@ -47,47 +47,56 @@
   }
 </script>
 <main>
+
+
 <body onload="jumbleButtons()"></body>
-  <div class="container" >
+  <div class="container">
 
 
     <!-- Trivia page HTML HERE -->
-    <form action="/home" method="GET">
-      <input style = "float: left;"class="btn btn-primary" type="submit" value="Home"/>
-    </form>
+    <br>
+    <% for (let i = 0; i < lives; i++) { %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+      </svg>
+    <% } %>
     <h3 style="float: right;">Score = <%=currscore%> </h3>
     <br>
     <br>
     <h3 style = "float: right;">Highscore = <%=highscore%></h3>
     <br><br><br>
-    <h1 style="text-align: center;"><%=trivia[0].question.text%></h1>
+    <h1 style="text-align: center;  background-color: rgba(200,200,200,0.75);"><%=trivia[0].question.text%></h1>
     <br>
     <br>
     <div class="text-center">
 
+
+
+    
       <form action="/verifyAnswer" method="POST">
         <input id="h1"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
         <input id = "correctAnswer1" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button  id="A1" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+        <button  id="A1"  class="btn btn-dark" type="submit" ></button>
       </form>
-    <br>  
+      <br>
       <form action="/verifyAnswer" method="POST">
         <input id="h2"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
         <input id = "correctAnswer2" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button  id="A2" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+        <button  id="A2"   class="btn btn-dark" type="submit" ></button>
       </form>
-    <br>
+      <br>
     <form action="/verifyAnswer" method="POST">
       <input id="h3"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
       <input id = "correctAnswer3" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-      <button  id="A3" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+      <button  id="A3"   class="btn btn-dark" type="submit" ></button>
     </form>
     <br>
       <form action="/verifyAnswer" method="POST">
         <input  id="h4" hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
         <input id = "correctAnswer4" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
-        <button  id="A4" style=" display:inline-block;" class="btn btn-primary" type="submit" ></button>
+        <button  id="A4" class="btn btn-dark" type="submit" ></button>
       </form>
+      <br>
       <!-- <button onclick="test('%=trivia[0].incorrectAnswers[0]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[0]%></button> -->
 
     <!-- <form action="/verifyAnswer" method="POST">
@@ -106,19 +115,51 @@
 
   <br>
   <br>
+  <p style="font-size: 100px;"id="demo"></p>
+  <br>
   <p id="correctorno"></p>
+
 </div>
+
+  </head>
+  
+ 
+  
+  <script>
+  // Set the date we're counting down to
+  let count = 10;
+  const timer = setInterval(function (){
+  count--;
+  document.getElementById("demo").innerHTML = count + "s ";
+  if(count===0){
+  clearInterval(timer);
+  //time up message
+  document.getElementById("demo").innerHTML = "Time's up ";
+// <a href="/gameOver.ejs"> </a>
+// <meta http-equiv="refresh" content="3;url="/gameOver.ejs" />
+window.location = "/gameOver";
+  }
+  },1000);
+  </script>
+   <script>
+    function checkAnswer(answer, correctAnswer){
+      console.log(answer);
+      console.log(correctAnswer);
+      if(answer.localeCompare(correctAnswer) == 0){
+        document.getElementById("correctorno").innerHTML = "Correct!";
+
+      }else{
+
+        document.getElementById("correctorno").innerHTML = "Incorrect";
+      }
+
+    }
+  </script>
 
 <div class="col"><%- include ('../partials/message') %></div>
-</div>
 
-   
-      <!-- put all in one form, one universal API that queries the right answer, get user input (req.body.buttonclick) these are submit buttons
-Once we have user input, make query to find right answer for question, compare and perform the correspoinding action for correct/incorrect answer -->
-
-
-
-
+  </div>
+ 
 
 </main>
 

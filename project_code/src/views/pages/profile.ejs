@@ -1,0 +1,81 @@
+<%- include ('../partials/header') %> 
+<%- include ('../partials/footer') %>
+
+<main>
+
+  <%- include ('../partials/navbar') %> 
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>User Profile</title>
+      <style>
+        .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        background-color: rgb(87,187,226);
+        
+        }
+        
+        body{
+          background-image: url('img/homeBackground.png');
+         
+        }
+        .navbar{
+          background-color: transparent;
+        }
+        #navbarToggleExternalContent{
+      background-color: rgb(87,187,226);
+  
+      }
+      </style>
+    </head>
+  
+    
+      <br>
+      <div class="container" style="text-align: center;">
+        <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+          <!--Hobby Cards-->
+         
+          <div id="eventcards">
+            <div class="row">
+             
+
+                <!--Event Card:-->
+                <div class="col-sm " id="event-card-">
+                  <div class="card " style="width: 1000px;">
+                    <div class="card-body rounded">
+                    
+                      <img src="<%=profile_pic%>" style="border-radius: 50%; width: 150px; height: 150px;">
+                      <h1><%= username %>s' profile </h1>
+                      <form action="/change_pic" method="GET">
+                      <input class="btn btn-dark" type="submit" value="Change Profile Pic"/>
+                      </form>
+                      <br>
+                     
+         
+                    
+                      <h2>High Score: <%= highscore%> </h2>
+         
+                      <h2> Answers right: <%= answers_right%> </h2>
+         
+                      <h2> Answers wrong: <%=answers_wrong%>  </h2>
+                      <h2>All Time score: <%=all_time_score%></h2>
+            
+                      <h2>Currency: <%=currency%></h2>
+                    </div>
+                     
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+        </div>
+      
+     
+
+
+    
+</main>

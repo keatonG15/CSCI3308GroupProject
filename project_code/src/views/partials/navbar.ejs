@@ -1,0 +1,46 @@
+<style>
+    #navbarToggleExternalContent{
+        background-color: lightblue;
+    }
+    .navbar{
+        background-color: lightblue;
+        
+    }
+    .navbar-toggler{
+        border: solid black;
+        color: black;
+    }
+</style>
+<div class="collapse" id="navbarToggleExternalContent" >
+    <div class=" p-4">
+        <form action="/home" method="GET">
+            <input class="btn " type="submit" value="Home"/>
+        </form>
+
+      <form action="/profile" method="GET">
+        <input class="btn " type="submit" value="Profile"/>
+      </form>
+
+      <form action="/rewards" method="GET">
+        <input  class="btn " type="submit" value="Rewards"/>
+      </form>
+      
+      <form action="/play" method="GET">
+        <input class="btn " type="submit" value="Enter the Tank"/>
+      </form>
+
+      <form action="/logout" method="GET">
+        <input  class="btn " type="submit" value="Logout"/>
+      </form>
+
+
+
+    </div>
+  </div>
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+    </div>
+  </nav>

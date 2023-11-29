@@ -1,20 +1,116 @@
 <%- include ('../partials/header') %> 
 
 <main>
+  <%- include ('../partials/navbar') %> 
+  <style>
+    body{
+      background-image: url('img/homeBackground.png');
+      background-color: lightblue;
+  
+    }
+    .navbar{
+      background-color: transparent;
+    }
+    #navbarToggleExternalContent{
+      background-color: rgb(87,187,226);
+  
+      }
+      td{
+        font-size: 25px;
+      }
+  </style>
+  
 
-  <div class="container text-center">
+    <h1 style="text-align: center;">Welcome to Think Tank Trivia</h1>
+    
+
+    <div class="container text-center">
+    <!-- <form action="/leaderboard" method="GET">
+      <input style="float: right;" class="btn btn-dark" type="submit" value="Leaderboard"/>
+    </form> -->
+    <br><br><br> 
+    <div class="row">
+      <div class="column" style="background-color:rgba(100,100,100, 0.5);">
+        <h2>Top 5 Leaderboard</h2>
+        <table class ="table">
+          
+      
+         <% for(let i =0; i < size; i++){ %>
+          <tbody>
+            <tr>
+            
+         <td scope ="row" width = '200px'> <%=i+1%></td>
+        
+           <td width = 100px><img src="<%=leaders[i].profile_pic%>" width = "50px"></td>
+           <td> <%=leaders[i].username%></td>
+         
+          
+        <td><%=leaders[i].highscore%></td>
+        
+            
+            </tr>
+        
+
+          </tbody>
+
+         <% } %> 
+       
+        </table>
+        <br><br>
+        <button class="btn btn-dark"style="width: 300px" onclick="showInstructions()">How to Play</button>
+      </div>
+      <div class="column" style="border: 0px">
+        <h1>Welcome <%= username %>!</h1>
+        <h3 >Highscore: <%= highscore%> </h3>
+    
+        <form action="/play" method="GET">
+          <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>
+        </form>
+        <br><br>
+        <div id="instructions"  style="display: inline-block;border: solid black 1px; background-color: rgba(100,100,100, 0.75); text-align: left; visibility: hidden;">
+          <br>
+          <h3 style="text-align: center;">How to Play</h3>
+          <ul>
+            <li>Answer the questions before the time runs out!</li>
+            <br>
+            <li>You have three lives, one missed question = 1 missed life</li>
+            <br>
+            <li>1 correct answer = +10pts</li>
+            <br>
+            <li>If you run out of time the game automatically ends</li>
+            <br>
+            <li>See the 'Profile' page in the dropdown menu to see your stats!</li>
+            <br>
+            <li>Get a higher and higher score until you've made it on the leaderboard!</li>
+            <br>
+    
+          </ul>
+    
+    
+    
+    
+        </div>
+      </div>
     <!-- Home page HTML HERE -->
-    <form action="/logout" method="GET">
-      <input style="float: right;" class="btn btn-primary" type="submit" value="Logout"/>
-    </form>
-    <h1>Welcome <%= username %></h1>
-    <h3>Highscore: <%= highscore%> </h3>
-    <form action="/play" method="GET">
-      <input class="btn btn-primary" type="submit" value="Play"/>
-    </form>
+   
+   
+    
   </div>
+
+
+  
   
 
 </main>
+<script>
+function showInstructions(){
+  const instructions = document.getElementById('instructions');
+  instructions.style.visibility = 'visible';
+
+
+}
+
+
+</script>
 
 <%- include ('../partials/footer') %>
