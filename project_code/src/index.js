@@ -327,34 +327,7 @@ app.post('/verifyAnswer', (req, res) =>{
     });
   
    }else{
-   if(req.session.user.currentscore >= req.session.user.highscore){
-     const highscore =
-       'update users set highscore = $1, answers_wrong = $2 where username = $4 returning * ;';
-     // $1 and $2 will be replaced by req.body.name, req.body.username
-     db.any(highscore, [req.session.user.currentscore, wrong, '3',  req.session.user.username])
-     .then(function (data) {
-     // console.log("asdaskdjnakjask",data)
-      req.session.user.highscore = req.session.user.currentscore;
-      req.session.user.answers_wrong = wrong;
-      res.redirect('/gameOver');
-     })
-     // if query execution fails
-     // send error message
-     .catch(function (err) {
-       return console.log(err);
-     });
-     //no highscore
-   }else{
-    const update_wrong =
-    'update users set answers_wrong = $1 where username = $2 returning * ;';
-    db.any(update_wrong, [ wrong, req.session.user.username])
-     .then(function (data) {
-      req.session.user.answers_wrong = wrong;
-      res.redirect('/gameOver');
-     });
-  
-     
-   }
+   res.redirect('/gameOver');
   }
    }
   
@@ -394,29 +367,61 @@ app.get('/gameOver', (req,res)=>{
   //console.log("Answer", req.session.user.curranswer)
  var reset = 0;
  var tempScore = req.session.user.currentscore;
+ var wrong = req.session.user.answers_wrong + 1;
+
+ if(req.session.user.currentscore >= req.session.user.highscore){
+
+  const highscore =
+    'update users set highscore = $1, answers_wrong = $2, lives = $3, currentscore = $4, using_2x = $5 where username = $6 returning * ;';
+  // $1 and $2 will be replaced by req.body.name, req.body.username
+  db.any(highscore, [req.session.user.currentscore, wrong, '3', reset, '0',  req.session.user.username])
+  .then(function (data) {
+  // console.log("asdaskdjnakjask",data)
+   req.session.user.highscore = req.session.user.currentscore;
+   req.session.user.answers_wrong = wrong,
+   req.session.user.lives = '3',
+   req.session.user.currentscore = reset,
+   req.session.user.using_2x = '0';
+
+   res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
+
+  })
+  // if query execution fails
+  // send error message
+  .catch(function (err) {
+    return console.log(err);
+  });
 
 
- const endGame =
-     'update users set currentscore = $1, lives = $2, using_2x = $3 where username = $4 returning * ;';
-   // $1 and $2 will be replaced by req.body.name, req.body.username
-   db.any(endGame, [reset, '3', '0', req.session.user.username])
-   .then(function (data) {
-   // console.log("aaa", req.session.user.currAnswer);
-    req.session.user.currentscore = reset,
-    req.session.user.lives = '3',
-    req.session.user.using_2x = '0';
-    res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
-   })
-   // if query execution fails
-   // send error message
-   .catch(function (err) {
-     return console.log(err);
-   });
-
-
-
-
+  //no highscore
+}else{
+  const endGame =
+  'update users set currentscore = $1, lives = $2, using_2x = $3, answers_wrong = $4 where username = $5 returning * ;';
+// $1 and $2 will be replaced by req.body.name, req.body.username
+db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
+.then(function (data) {
+// console.log("aaa", req.session.user.currAnswer);
+ req.session.user.currentscore = reset,
+ req.session.user.lives = '3',
+ req.session.user.using_2x = '0',
+ req.session.user.answers_wrong = wrong;
+ res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
 })
+// if query execution fails
+// send error message
+.catch(function (err) {
+  return console.log(err);
+});
+
+  
+}
+
+ 
+
+
+
+
+});
 
 app.get('/welcome', (req, res) => {
   res.json({status: 'success', message: 'Welcome!'});

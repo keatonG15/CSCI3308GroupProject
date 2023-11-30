@@ -69,49 +69,45 @@
     <br>
     <br>
     <div class="text-center">
-
-
-
-    
+     
+      <div class="btn-group mr-2" role="group" aria-label="First group">
       <form action="/verifyAnswer" method="POST">
         <input id="h1"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
         <input id = "correctAnswer1" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
         <button  id="A1"  class="btn btn-dark" type="submit" ></button>
       </form>
-      <br>
+      </div>
+     
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+
       <form action="/verifyAnswer" method="POST">
         <input id="h2"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
         <input id = "correctAnswer2" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
         <button  id="A2"   class="btn btn-dark" type="submit" ></button>
       </form>
-      <br>
+     </div>
+     <div class="btn-group mr-2" role="group" aria-label="First group">
+
+
     <form action="/verifyAnswer" method="POST">
       <input id="h3"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
       <input id = "correctAnswer3" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
       <button  id="A3"   class="btn btn-dark" type="submit" ></button>
     </form>
-    <br>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+
+
       <form action="/verifyAnswer" method="POST">
         <input  id="h4" hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
         <input id = "correctAnswer4" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
         <button  id="A4" class="btn btn-dark" type="submit" ></button>
       </form>
+
+      
+</div>
+
       <br>
-      <!-- <button onclick="test('%=trivia[0].incorrectAnswers[0]%>', '%=trivia[0].correctAnswer%>')">%=trivia[0].incorrectAnswers[0]%></button> -->
-
-    <!-- <form action="/verifyAnswer" method="POST">
-      <input name = "B1" class="btn btn-danger" type="submit" value = "%=trivia[0].incorrectAnswers[0]%>" onclick="test('%=trivia[0].incorrectAnswers[0]%>')">
-      <input name = "B2" class="btn btn-danger" type="submit" value = "%=trivia[0].incorrectAnswers[1]%>">
-      <input name = "B3" class="btn btn-success" type="submit" value = "%=trivia[0].correctAnswer%>">
-      <input name = "B4" class="btn btn-danger" type="submit" value = "%=trivia[0].incorrectAnswers[2]%>">
-    </form> -->
-
-
-    <!-- <button class="btn btn-danger" type="button" onclick="test('<%=trivia[0].incorrectAnswers[0]%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].incorrectAnswers[0]%></button>
-    <button class="btn btn-danger" type="button" onclick="test('<%=trivia[0].incorrectAnswers[1]%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].incorrectAnswers[1]%></button>
-    <button class="btn btn-success" type="button" onclick="test('<%=trivia[0].correctAnswer%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].correctAnswer%></button>
-    <button class="btn btn-danger" type="button" onclick="test('<%=trivia[0].incorrectAnswers[2]%>', '<%=trivia[0].correctAnswer%>')"><%=trivia[0].incorrectAnswers[2]%></button> -->
-
 
   <br>
   <br>
@@ -120,7 +116,7 @@
   <p id="correctorno"></p>
 
 </div>
-
+  </div>
   </head>
   
  
