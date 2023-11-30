@@ -62,10 +62,33 @@
       <div class="column" style="border: 0px">
         <h1>Welcome <%= username %>!</h1>
         <h3 >Highscore: <%= highscore%> </h3>
-    
+        <h3>Lives: <%= lives%> </h3>
+        <h3>Double Points: <%= points_2x%></h3>
+
+
+        <% if(points_2x > 0){ %>
+          <form action="/usedouble" method="POST">
+           
+            <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Use Double Points!"/>
+          </form>
+          <br>
+          <form action="/play" method="GET">
+            <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank!"/>
+          </form>
+          
+
+       <% }else{ %>
         <form action="/play" method="GET">
           <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>
         </form>
+
+       <% } %>
+    
+        
+
+
+
+
         <br><br>
         <div id="instructions"  style="display: inline-block;border: solid black 1px; background-color: rgba(100,100,100, 0.75); text-align: left; visibility: hidden;">
           <br>

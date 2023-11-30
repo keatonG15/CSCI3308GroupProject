@@ -1,7 +1,29 @@
 <%- include('../partials/header') %>
-
+<%- include ('../partials/navbar') %> 
 <main>
-  <%- include ('../partials/navbar') %> 
+  <style>
+     .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        background-color: rgb(87,187,226);
+        
+        }
+        
+    main{
+      background-image: none;
+      background-color:  lightblue;
+      text-align: center;
+    }
+
+    body{
+      background-image: none;
+      background-image: none;
+      background-color:  lightblue;
+    }
+
+  </style>
+
   
   <div class="profile">
     <div class="profile-header">
@@ -10,68 +32,65 @@
     </div>
     <div class="profile-details">
       <p>You have <strong><%= currency %></strong> currency available.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Reward</th>
-            <th>Cost</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2x Points</td>
-            <td>3 currecy</td>
-            <td><form id="rewardForm" action="/buyReward" method="POST">
-    <!-- Hidden input fields -->
-    <input hidden type="text" name="username" value="<%= username %>"/>
-    <input hidden type="text" name="reward" value="points_2x"/> <!-- Replace with actual reward type -->
-    <input hidden type="text" name="cost" value="3"/> <!-- Replace with actual reward cost -->
+     
+      <!--=============================================================================-->
+      <div id="eventcards">
+         <div class="row">
+            <!--Event Card:-->
+            <div class="col-sm " id="event-card-">
+              <div class="card " style="width: 1000px;">
+                <div class="card-body rounded">
 
-    <!-- Button to trigger form submission -->
-    <button id="buyRewardButton" class="btn btn-dark" type="button">Buy Reward</button>
-</form>
+                  <form id="rewardForm" action="/buyReward" method="POST">
+                    <!-- Hidden input fields -->
+                   <input hidden type="text" name="username" value="<%= username %>"/>
+                   <input hidden type="text" name="reward" value="extralife"/> <!-- Replace with actual reward type -->
+                   <input hidden type="text" name="cost" value="3"/> <!-- Replace with actual reward cost -->
+           
+                    <!-- Button to trigger form submission -->
+                   <button id="buyRewardButton" class="btn btn-dark" type="submit">Extra Lives</button>
+                   </form>
+                 
+                </div>
+              </div>
+            </div>
+     
+      
 
-<script>
-    document.getElementById('buyRewardButton').addEventListener('click', function() {
-        // You can add any pre-submission logic here if needed
+      <!--=============================================================================-->
 
-        // Submit the form
-        document.getElementById('rewardForm').submit();
-    });
-</script>
-</td>
-          </tr>
-          <tr>
-            <td>3x Points</td>
-            <td>5 currecy</td>
-            <td><form id="rewardForm" action="/buyReward" method="POST">
-              <!-- Hidden input fields -->
-              <input hidden type="text" name="username" value="<%= username %>"/>
-              <input hidden type="text" name="reward" value="points_3x"/> <!-- Replace with actual reward type -->
-              <input hidden type="text" name="cost" value="5"/> <!-- Replace with actual reward cost -->
+
+           <!--Event Card:-->
+           <div class="col-sm " id="event-card-">
+             <div class="card " style="width: 1000px;">
+               <div class="card-body rounded">
+
+                <form id="rewardForm" action="/buyReward" method="POST">
+                  <!-- Hidden input fields -->
+                  <input hidden type="text" name="username" value="<%= username %>"/>
+                  <input hidden type="text" name="reward" value="points_2x"/> <!-- Replace with actual reward type -->
+                  <input hidden type="text" name="cost" value="5"/> <!-- Replace with actual reward cost -->
+              
+                  <!-- Button to trigger form submission -->
+                  <button id="buyRewardButton" class="btn btn-dark" type="submit">Double Points</button>
+                </form>
+
+               </div>
+             </div>
+           </div>
+         </div>
+      </div>
+     
+      
           
-              <!-- Button to trigger form submission -->
-              <button id="buyRewardButton" class="btn btn-dark" type="button">Buy Reward</button>
-          </form>
-          
-          <script>
-              document.getElementById('buyRewardButton').addEventListener('click', function() {
-                  // You can add any pre-submission logic here if needed
-          
-                  // Submit the form
-                  document.getElementById('rewardForm').submit();
-              });
-          </script>
-          </td>
-          </tr>
-        </tbody>
-      </table>
+      <!--=============================================================================-->
+        
     </div>
   </div>
-
+  <%- include ('../partials/message') %>
+  <%- include('../partials/footer') %>
 </main>
 
 
 
-<%- include('../partials/footer') %>
+
