@@ -133,8 +133,31 @@ app.post('/register', async (req, res) => {
 
  db.none(query)
    .then(()=>{
-   res.redirect('/login');
+
+   // console.log("HELLO")
+    const getUser = `SELECT * FROM users WHERE username = '${username}';`;
+    db.one(getUser)
+     .then(async function (data){
+        
+    //    console.log('Username: ' + data.username + ' Password: ' + data.password);
+        // console.log("User Inputted: " + req.body.username + " - " + req.body.password  + "\nTable Found: " + data.username + " - " + data.password);
+       
+       
+         req.session.user = data;
+         req.session.save();
+        // console.log("here");
+         res.redirect('/home'); //302
+   
+         
+     })
+     .catch(function (err) {
+       res.render("pages/register.ejs", {message: `Username not found.`, error: true});
+        
+     });
+
+
  })
+
  .catch((error) =>{
   res.render('pages/register.ejs', {message: 'Username already exists', error: true});
 
@@ -379,7 +402,7 @@ app.get('/gameOver', (req,res)=>{
    req.session.user.currentscore = reset,
    req.session.user.using_2x = '0';
 
-   res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
+   res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer, points_2x: req.session.user.points_2x});
 
   })
   // if query execution fails
@@ -401,7 +424,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
  req.session.user.lives = '3',
  req.session.user.using_2x = '0',
  req.session.user.answers_wrong = wrong;
- res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer});
+ res.render('pages/gameOver', {currscore: tempScore, highscore: req.session.user.highscore, correctanswer: req.session.user.curranswer, points_2x: req.session.user.points_2x});
 })
 // if query execution fails
 // send error message
