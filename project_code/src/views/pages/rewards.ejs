@@ -1,7 +1,29 @@
 <%- include('../partials/header') %>
-
+<%- include ('../partials/navbar') %> 
 <main>
-  <%- include ('../partials/navbar') %> 
+  <style>
+     .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        background-color: rgb(87,187,226);
+        
+        }
+        
+    main{
+      background-image: none;
+      background-color:  lightblue;
+      text-align: center;
+    }
+
+    body{
+      background-image: none;
+      background-image: none;
+      background-color:  lightblue;
+    }
+
+  </style>
+
   
   <div class="profile">
     <div class="profile-header">
@@ -10,65 +32,65 @@
     </div>
     <div class="profile-details">
       <p>You have <strong><%= currency %></strong> currency available.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Reward</th>
-            <th>Cost</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2x Points</td>
-            <td>5 Currency</td>
-            <td><button onclick="buyReward('2x Points', 5)">Buy</button></td>
-          </tr>
-          <tr>
-            <td>Revive</td>
-            <td>20 Currency</td>
-            <td><button onclick="buyReward('Revive', 20)">Buy</button></td>
-          </tr>
-          <tr>
-            <td>3x Points</td>
-            <td>7 Currency</td>
-            <td><button onclick="buyReward('3x Points', 7)">Buy</button></td>
-          </tr>
-          <tr>
-            <td>Bomb (Explode 1 Question)</td>
-            <td>3 Currency</td>
-            <td><button onclick="buyReward('Bomb', 3)">Buy</button></td>
-          </tr>
-          <tr>
-            <td>Bomb 2x (Explodes Two Questions)</td>
-            <td>5 Currency</td>
-            <td><button onclick="buyReward('Bomb 2x', 5)">Buy</button></td>
-          </tr>
-        </tbody>
-      </table>
+     
+      <!--=============================================================================-->
+      <div id="eventcards">
+         <div class="row">
+            <!--Event Card:-->
+            <div class="col-sm " id="event-card-">
+              <div class="card " style="width: 1000px;">
+                <div class="card-body rounded">
+
+                  <form id="rewardForm" action="/buyReward" method="POST">
+                    <!-- Hidden input fields -->
+                   <input hidden type="text" name="username" value="<%= username %>"/>
+                   <input hidden type="text" name="reward" value="extralife"/> <!-- Replace with actual reward type -->
+                   <input hidden type="text" name="cost" value="3"/> <!-- Replace with actual reward cost -->
+           
+                    <!-- Button to trigger form submission -->
+                   <button id="buyRewardButton" class="btn btn-dark" type="submit">Extra Lives</button>
+                   </form>
+                 
+                </div>
+              </div>
+            </div>
+     
+      
+
+      <!--=============================================================================-->
+
+
+           <!--Event Card:-->
+           <div class="col-sm " id="event-card-">
+             <div class="card " style="width: 1000px;">
+               <div class="card-body rounded">
+
+                <form id="rewardForm" action="/buyReward" method="POST">
+                  <!-- Hidden input fields -->
+                  <input hidden type="text" name="username" value="<%= username %>"/>
+                  <input hidden type="text" name="reward" value="points_2x"/> <!-- Replace with actual reward type -->
+                  <input hidden type="text" name="cost" value="5"/> <!-- Replace with actual reward cost -->
+              
+                  <!-- Button to trigger form submission -->
+                  <button id="buyRewardButton" class="btn btn-dark" type="submit">Double Points</button>
+                </form>
+
+               </div>
+             </div>
+           </div>
+         </div>
+      </div>
+     
+      
+          
+      <!--=============================================================================-->
+        
     </div>
   </div>
-
+  <%- include ('../partials/message') %>
+  <%- include('../partials/footer') %>
 </main>
 
-<script>
-  function buyReward(reward, cost) {
-    const username = '<%= username %>'; // Replace with actual username variable
 
-    fetch('/buyReward', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, reward, cost })
-    })
-    .then(response => response.text())
-    .then(message => {
-      alert(message);
-      if (message === 'Reward purchased successfully') {
-        window.location.reload(); // Reload the page to update currency display
-      }
-    })
-    .catch(error => console.error('Error:', error));
-  }
-</script>
 
-<%- include('../partials/footer') %>
+
