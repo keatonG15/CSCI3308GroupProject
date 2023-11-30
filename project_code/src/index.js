@@ -95,7 +95,7 @@ app.post('/login',  (req,res)=>{
    .then(async function (data){
       
   //    console.log('Username: ' + data.username + ' Password: ' + data.password);
-       console.log("User Inputted: " + req.body.username + " - " + req.body.password  + "\nTable Found: " + data.username + " - " + data.password);
+      // console.log("User Inputted: " + req.body.username + " - " + req.body.password  + "\nTable Found: " + data.username + " - " + data.password);
      
        const match = await bcrypt.compare(req.body.password, data.password);
   
@@ -160,8 +160,8 @@ app.get('/home', (req, res) => {
   .then(function (data){
     
 //    console.log('Username: ' + data.username + ' Password: ' + data.password);
-console.log(data);
-console.log("Size", data.length);
+//console.log(data);
+//console.log("Size", data.length);
   res.render("pages/home.ejs",{
    leaders : data,
    size: data.length,
@@ -204,11 +204,7 @@ db.any(query, [req.session.user.points_2x - 1, 1, req.session.user.username])
 
 app.get('/play', (req,res) => {
 
-if(req.session.user.using_2x == 1){
-  console.log("Using 2x");
-}else{
-  console.log("Not using 2x");
-}
+
 axios({
  url: `https://the-trivia-api.com/v2/questions`,
  method: 'GET',
@@ -224,7 +220,7 @@ axios({
 })
  .then(results => {
   // var score = 0;
-   //console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+   console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
    req.session.user.curranswer = results.data[0].correctAnswer;
    if(req.session.user.currentscore > 0 && req.session.user.last_right == 1){
    res.render("pages/trivia.ejs",
@@ -257,7 +253,7 @@ res.redirect('/verifyAnswer');
 app.post('/verifyAnswer', (req, res) =>{
 
 
-  console.log("Score", req.session.user.currentscore);
+  //console.log("Score", req.session.user.currentscore);
   if(req.session.user.using_2x == 1){
   var newScore = req.session.user.currentscore + 20;
   }else{
@@ -266,11 +262,11 @@ app.post('/verifyAnswer', (req, res) =>{
   
   //need help getting the asnwer the user selected
   //need help getting the correct answer for comparison
-  console.log("Answer" , req.body);
+  //console.log("Answer" , req.body);
   //console.log("Correct Answer", results.data.correctAnswer);
   if(req.body.answer.localeCompare(req.body.correctAnswer) == 0){
   
-   console.log("Correct!!!")
+   //console.log("Correct!!!")
    var right = req.session.user.answers_right + 1;
    var all_time = req.session.user.all_time_score + 10;
 
@@ -290,7 +286,7 @@ app.post('/verifyAnswer', (req, res) =>{
      // $1 and $2 will be replaced by req.body.name, req.body.username
      db.any(updateScore, [newScore, right, all_time, money, '1', req.session.user.username])
      .then(function (data) {
-      console.log("asdaskdjnakjask",data)
+     // console.log("asdaskdjnakjask",data)
       req.session.user.currentscore = newScore
       req.session.user.answers_right = right
       req.session.user.all_time_score = all_time
@@ -307,7 +303,7 @@ app.post('/verifyAnswer', (req, res) =>{
   
   
   }else{
-   console.log("Incorrect!!!")
+  // console.log("Incorrect!!!")
    var wrong = req.session.user.answers_wrong + 1;
    var life = req.session.user.lives - 1;
   
@@ -363,7 +359,7 @@ db.any(query, [req.body.selection, req.session.user.username])
 
 
 app.get('/gameOver', (req,res)=>{
-  console.log(req.session.user)
+  //console.log(req.session.user)
   //console.log("Answer", req.session.user.curranswer)
  var reset = 0;
  var tempScore = req.session.user.currentscore;
@@ -493,7 +489,7 @@ app.get('/welcome', (req, res) => {
          //  console.log(req.session.user.username, " bought ", reward, " for ", cost, " credits!")
          if(reward.localeCompare("extralife") == 0 ){
          
-           console.log(life);
+           //console.log(life);
            //console.log("life");
            const sellitem = `UPDATE users SET currency = $1, lives = $2 WHERE username = $3;`;
            db.any(sellitem, [req.session.user.currency - cost, life, req.session.user.username])
@@ -536,7 +532,7 @@ app.get('/welcome', (req, res) => {
         
          }else{
     
-           console.log(points);
+          // console.log(points);
           // console.log("points");
           const sellitem = `UPDATE users SET currency = $1, points_2x = $2 WHERE username = $3;`;
           db.any(sellitem, [req.session.user.currency - cost, points, req.session.user.username])
