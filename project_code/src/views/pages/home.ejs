@@ -30,7 +30,8 @@
     </form> -->
     <br><br><br> 
     <div class="row">
-      <div class="column" style="background-color:rgba(100,100,100, 0.5);">
+      <div class="column">
+        <div style="background-color:rgba(100,100,100, 0.5); border: solid black 1px;">
         <h2>Top 5 Leaderboard</h2>
         <table class ="table">
           
@@ -58,14 +59,65 @@
         </table>
         <br><br>
         <button class="btn btn-dark"style="width: 300px" onclick="showInstructions()">How to Play</button>
-      </div>
+        <p> </p>
+            </div>
+      <br>
+    </div>
       <div class="column" style="border: 0px">
         <h1>Welcome <%= username %>!</h1>
         <h3 >Highscore: <%= highscore%> </h3>
-    
+        <h3>Lives: <%= lives%> </h3>
+        <h3>Double Points: <%= points_2x%></h3>
+
+        
+
+        <% if(points_2x > 0){ %>
+         
+          
+                    <!-- Button trigger modal -->
+          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+           Enter the Tank!
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+              <div class="modal-content" style = "background-color: rgb(86,187,229);">
+                <div class="modal-header border-0">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">You have Double Points Available!</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                  Would you like to use them?
+                </div>
+                <div class="modal-footer border-0">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                      <form action="/usedouble" method="POST">
+                        <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Yes!"/>
+                      </form>
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                      <form action="/play" method="GET">
+                        <input style ="width: 200px;"class="btn btn-dark" type="submit" value="No!"/>
+                      </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+       <% }else{ %>
         <form action="/play" method="GET">
           <input style ="width: 200px;"class="btn btn-dark" type="submit" value="Enter the Tank"/>
         </form>
+
+       <% } %>
+    
+        
+
+
+
+
         <br><br>
         <div id="instructions"  style="display: inline-block;border: solid black 1px; background-color: rgba(100,100,100, 0.75); text-align: left; visibility: hidden;">
           <br>
@@ -114,3 +166,4 @@ function showInstructions(){
 </script>
 
 <%- include ('../partials/footer') %>
+
