@@ -5,7 +5,7 @@
   }
 
 
-  const answers = ["<%=trivia[0].incorrectAnswers[0]%>", "<%=trivia[0].incorrectAnswers[1]%>", "<%=trivia[0].incorrectAnswers[2]%>", "<%=trivia[0].correctAnswer%>"]
+  const answers = ["<%=trivia[index].incorrectAnswers[0]%>", "<%=trivia[index].incorrectAnswers[1]%>", "<%=trivia[index].incorrectAnswers[2]%>", "<%=trivia[index].correctAnswer%>"]
   const nums = [0,1,2,3] 
   const rando = []  
   function jumbleButtons(){
@@ -65,14 +65,14 @@
     <br>
     <h3 style = "float: right;">Highscore = <%=highscore%></h3>
     <br><br><br>
-    <h1 style="text-align: center;  background-color: rgba(200,200,200,0.75);"><%=trivia[0].question.text%></h1>
+    <h1 style="text-align: center;  background-color: rgba(200,200,200,0.75);"><%=trivia[index].question.text%></h1>
     <br>
     <br>
     <div class="text-center">
      
       <div class="btn-group mr-2" role="group" aria-label="First group">
       <form action="/verifyAnswer" method="POST">
-        <input id="h1"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[0]%>"/>
+        <input id="h1"  hidden type="text" name="answer" value="<%=trivia[index].incorrectAnswers[0]%>"/>
         <input id = "correctAnswer1" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
         <button  id="A1"  class="btn btn-dark" type="submit" ></button>
       </form>
@@ -81,7 +81,7 @@
       <div class="btn-group mr-2" role="group" aria-label="First group">
 
       <form action="/verifyAnswer" method="POST">
-        <input id="h2"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
+        <input id="h2"  hidden type="text" name="answer" value="<%=trivia[index].incorrectAnswers[1]%>"/>
         <input id = "correctAnswer2" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
         <button  id="A2"   class="btn btn-dark" type="submit" ></button>
       </form>
@@ -90,7 +90,7 @@
 
 
     <form action="/verifyAnswer" method="POST">
-      <input id="h3"  hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[1]%>"/>
+      <input id="h3"  hidden type="text" name="answer" value="<%=trivia[index].incorrectAnswers[1]%>"/>
       <input id = "correctAnswer3" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
       <button  id="A3"   class="btn btn-dark" type="submit" ></button>
     </form>
@@ -99,7 +99,7 @@
 
 
       <form action="/verifyAnswer" method="POST">
-        <input  id="h4" hidden type="text" name="answer" value="<%=trivia[0].incorrectAnswers[2]%>"/>
+        <input  id="h4" hidden type="text" name="answer" value="<%=trivia[index].incorrectAnswers[2]%>"/>
         <input id = "correctAnswer4" hidden type="text" name="correctAnswer" value= "<%=trivia[0].correctAnswer%>"/>
         <button  id="A4" class="btn btn-dark" type="submit" ></button>
       </form>
