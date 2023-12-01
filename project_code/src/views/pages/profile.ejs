@@ -42,19 +42,19 @@
           <div class="col">
 
             <!-- Beginner-->
-            <%if((all_time_score > 0) && (all_time_score <= 50)){ %>
+            <%if((all_time_score >= 0) && (all_time_score <= 100)){ %>
                 <%- include('../partials/xpCards/beginnerXP') %>
             <% } %>    
             <!-- Intermediate-->
-            <%if((all_time_score > 50) && (all_time_score <= 100)){ %>
+            <%if((all_time_score > 100 ) && (all_time_score <= 500)){ %>
               <%- include('../partials/xpCards/intermediateXP') %>
             <% } %>    
             <!-- Advanced-->
-          <%if((all_time_score > 100) && (all_time_score <= 350)){ %>
+          <%if((all_time_score > 500) && (all_time_score <= 1000)){ %>
             <%- include('../partials/xpCards/advancedXP') %>
           <% } %>    
             <!-- Expert-->
-        <%if((all_time_score > 350)){ %>
+        <%if((all_time_score > 1000)){ %>
           <%- include('../partials/xpCards/expertXP') %>
         <% } %>    
 
@@ -130,27 +130,27 @@
           </div>
           
           <div class="col">
-            <%if((highscore >=0) && (highscore < 30) ){ %>
+            <%if((highscore >=0) && (highscore < 50) ){ %>
                 <%- include ('../partials/cards/newbie') %>
             <% } %>    
             
-            <%if((highscore >=30) && (highscore < 60)){ %>
+            <%if((highscore >= 50) && (highscore < 80)){ %>
                 <%- include ('../partials/cards/beginner') %>
             <% } %> 
 
-            <%if((highscore >= 60) && highscore< 100){ %>
+            <%if((highscore >= 80) && highscore< 130){ %>
                 <%- include ('../partials/cards/intermidiate') %>
             <% } %> 
 
-            <%if((highscore >=  100)  && (highscore < 150) ){ %>
+            <%if((highscore >=  130)  && (highscore < 200 )){ %>
                 <%- include ('../partials/cards/expert') %>
             <% } %> 
 
-            <%if((highscore >= 150) && (highscore < 250) ){ %>
+            <%if((highscore >= 200 ) && (highscore < 310) ){ %>
                 <%- include ('../partials/cards/einstein') %>
             <% } %> 
 
-            <%if(highscore >= 250 ){ %>
+            <%if(highscore >= 310 ){ %>
                 <%- include ('../partials/cards/god') %>
             <% } %> 
 
