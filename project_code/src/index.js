@@ -243,23 +243,68 @@ axios({
 })
  .then(results => {
   // var score = 0;
-   console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
-   req.session.user.curranswer = results.data[0].correctAnswer;
-   if(req.session.user.currentscore > 0 && req.session.user.last_right == 1){
-   res.render("pages/trivia.ejs",
-   {highscore: req.session.user.highscore,
-    currscore: req.session.user.currentscore, 
-    lives: req.session.user.lives,
-    trivia: results.data, 
-    message: `Correct! Nice Job!`});
-   }else{
-     res.render("pages/trivia.ejs",
-   {highscore: req.session.user.highscore, 
-    currscore: req.session.user.currentscore,
-    lives: req.session.user.lives, 
-    trivia: results.data});
-  
+  // console.log(results.data); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+   var check = 0;
+   for(var i = 0; i < 10; i++){
+
+    console.log(results.data[i].difficulty);
+
+    if(results.data[i].difficulty.localeCompare('medium') == 0 || results.data[i].difficulty.localeCompare('easy') == 0){
+      console.log(results.data[i]);
+
+      req.session.user.curranswer = results.data[i].correctAnswer;
+      check = 1;
+//===
+      if(req.session.user.currentscore > 0 && req.session.user.last_right == 1){
+        res.render("pages/trivia.ejs",
+        {highscore: req.session.user.highscore,
+         currscore: req.session.user.currentscore, 
+         lives: req.session.user.lives,
+         trivia: results.data, 
+         index: i,
+         message: `Correct! Nice Job!`
+       });
+       break;
+        }else{
+          res.render("pages/trivia.ejs",
+        {highscore: req.session.user.highscore, 
+         currscore: req.session.user.currentscore,
+         lives: req.session.user.lives, 
+         trivia: results.data,
+         index: i
+       });
+       break;
+       
+        }
+  //===
+    }
    }
+
+   if(check == 0){
+    req.session.user.curranswer = results.data[0].correctAnswer;
+
+    if(req.session.user.currentscore > 0 && req.session.user.last_right == 1){
+      res.render("pages/trivia.ejs",
+      {highscore: req.session.user.highscore,
+       currscore: req.session.user.currentscore, 
+       lives: req.session.user.lives,
+       trivia: results.data, 
+       index: 0,
+       message: `Correct! Nice Job!`
+     });
+      }else{
+        res.render("pages/trivia.ejs",
+      {highscore: req.session.user.highscore, 
+       currscore: req.session.user.currentscore,
+       lives: req.session.user.lives, 
+       trivia: results.data,
+       index: 0
+     });
+     
+      }
+   } 
+
+  
  })
  .catch(error => {
    // Handle errors
@@ -572,7 +617,7 @@ app.get('/welcome', (req, res) => {
             answers_wrong:req.session.user.answers_wrong,
             all_time_score:req.session.user.all_time_score,
             currency:req.session.user.currency,
-            message: "You bought an double points!"
+            message: "You bought double points!"
             
             
             })

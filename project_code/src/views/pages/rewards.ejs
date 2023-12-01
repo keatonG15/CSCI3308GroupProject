@@ -6,7 +6,9 @@
         margin: 0 auto; /* Added */
         float: none; /* Added */
         margin-bottom: 10px; /* Added */
-        background-color: rgb(87,187,226);
+        width: 300px;
+        height: 250px;
+       
         
         }
         
@@ -31,16 +33,16 @@
       <p>Use your currency to buy amazing rewards!</p>
     </div>
     <div class="profile-details">
-      <p>You have <strong><%= currency %></strong> currency available.</p>
+      <p>You have <strong><%= currency %></strong> credits available.</p>
      
       <!--=============================================================================-->
       <div id="eventcards">
          <div class="row">
-            <!--Event Card:-->
-            <div class="col-sm " id="event-card-">
-              <div class="card " style="width: 1000px;">
-                <div class="card-body rounded">
 
+            <div class="col-sm" id="event-card-">
+              <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+                <div class="card-body rounded ">
+                
                   <form id="rewardForm" action="/buyReward" method="POST">
                     <!-- Hidden input fields -->
                    <input hidden type="text" name="username" value="<%= username %>"/>
@@ -51,9 +53,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg"  height="100" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
-                    <br><br>
+                    <br>
+                   <p>3 Credits</p> 
+                   
                    <button id="buyRewardButton" class="btn btn-dark" type="submit">Extra Lives</button>
                    </form>
+                
                  
                 </div>
               </div>
@@ -63,26 +68,30 @@
 
       <!--=============================================================================-->
 
-
-           <!--Event Card:-->
-           <div class="col-sm " id="event-card-">
-             <div class="card " style="width: 1000px;">
-               <div class="card-body rounded">
-
+           <div class="col-sm" id="event-card-">
+            <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+              <div class="card-body rounded ">
+              
                 <form id="rewardForm" action="/buyReward" method="POST">
                   <!-- Hidden input fields -->
                   <input hidden type="text" name="username" value="<%= username %>"/>
                   <input hidden type="text" name="reward" value="points_2x"/> <!-- Replace with actual reward type -->
                   <input hidden type="text" name="cost" value="5"/> <!-- Replace with actual reward cost -->
                   <img src="img/dubPoints.png" height = "120">
-                  <br><br>
+                  <br>
+                  <p>5 Credits</p> 
+                 
                   <!-- Button to trigger form submission -->
                   <button id="buyRewardButton" class="btn btn-dark" type="submit">Double Points</button>
                 </form>
+              
+               
+              </div>
+            </div>
+          </div>
 
-               </div>
-             </div>
-           </div>
+
+
          </div>
       </div>
      
