@@ -59,3 +59,4 @@ RELEASE NOTES 'THINK TANK TRIVIA'
 
 
 
+Keep question and answers them  main focus, move timer up to top rightFocus mostly on CSS and 

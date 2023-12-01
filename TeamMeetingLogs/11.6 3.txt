@@ -12,4 +12,5 @@ Figure out the trivia API
 What are the challenges you are facing?
 We are strugglin on getting index.js to work correctly with out docker-compose.yaml. It creates the node_moduls folder, but not theexpress-section directory within which is causing us errors. 
 
+Meeting time : 15m
 
