@@ -51,7 +51,9 @@ RELEASE NOTES 'THINK TANK TRIVIA'
     - Possibly add more changes home page.
     - Implement more test cases and get ready for launch next week.
 ======================================================================================================================================================================================
-
+11/30 7:00 PM Release Notes v1.1.2 -beta 
+    -Implemented Fully functional profile page.
+    - Players can see ranking system and where they stand in XP and normal rank.
 
 
 

@@ -587,8 +587,13 @@ app.get('/logout', (req,res) =>{
 });
 
 
+app.get('/rankSystem', (req,res)=>{
+  res.render('pages/rankSystem.ejs');
+  });
 
-
+  app.get('/xpSystem', (req,res)=>{
+    res.render('pages/xpSystem.ejs');
+    });
 
 
 
