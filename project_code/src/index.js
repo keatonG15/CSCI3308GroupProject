@@ -77,7 +77,10 @@ app.use(
 // *****************************************************
 // <!-- Section 4: API Calls -->
 // *****************************************************
-
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+ });
+ 
 
 app.get('/', (req ,res) =>{
  res.redirect('/login');
@@ -487,10 +490,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
 
 });
 
-app.get('/welcome', (req, res) => {
-  res.json({status: 'success', message: 'Welcome!'});
- });
- 
+
  
  
  
@@ -649,14 +649,19 @@ app.get('/welcome', (req, res) => {
  
 app.get('/logout', (req,res) =>{
  req.session.destroy();
- res.render('pages/login', {message: `Logged Out Successfully`});
-
+ //res.render('pages/login', {message: `Logged Out Successfully`});
+res.redirect('/login');
 
 });
 
 
+app.get('/rankSystem', (req,res)=>{
+  res.render('pages/rankSystem.ejs');
+  });
 
-
+  app.get('/xpSystem', (req,res)=>{
+    res.render('pages/xpSystem.ejs');
+    });
 
 
 
