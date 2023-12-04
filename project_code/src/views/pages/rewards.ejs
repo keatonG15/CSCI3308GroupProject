@@ -7,21 +7,25 @@
         float: none; /* Added */
         margin-bottom: 10px; /* Added */
         width: 300px;
-        height: 250px;
+        height: 300px;
        
         
         }
+        .navbar{
+      background-color: transparent;
+    }
         
     main{
-      background-image: none;
-      background-color:  lightblue;
+     
       text-align: center;
     }
 
     body{
-      background-image: none;
-      background-image: none;
-      background-color:  lightblue;
+   
+      background-image: url('img/homeBackground.png');
+     
+  
+    
     }
 
   </style>
@@ -29,23 +33,31 @@
   
   <div class="profile">
     <div class="profile-header">
+      <div style="display: inline-block; background-color: rgba(250,250,250, 0.5);">
       <h1>Rewards Store</h1>
-      <p>Use your currency to buy amazing rewards!</p>
-    </div>
-    <div class="profile-details">
-      <p>You have <strong><%= currency %></strong> credits available.</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use your currency to buy amazing rewards! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+    
+      <p>You have <strong><%= user.currency %></strong> credits available.</p>   
+
+      <!-- <p>You have <strong><%=user.lives%></strong> lives.</p>
+      <p>You have <strong><%=user.points_2x%> </strong>double points available.</p> -->
+</div>
+
+        
+            
      
       <!--=============================================================================-->
       <div id="eventcards">
          <div class="row">
 
             <div class="col-sm" id="event-card-">
-              <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+              <div class="card" style = "background-color: rgba(250,250,250, 0.5);">
                 <div class="card-body rounded ">
                 
                   <form id="rewardForm" action="/buyReward" method="POST">
                     <!-- Hidden input fields -->
-                   <input hidden type="text" name="username" value="<%= username %>"/>
+                   <input hidden type="text" name="username" value="<%= user.username %>"/>
                    <input hidden type="text" name="reward" value="extralife"/> <!-- Replace with actual reward type -->
                    <input hidden type="text" name="cost" value="3"/> <!-- Replace with actual reward cost -->
            
@@ -57,7 +69,11 @@
                    <p>3 Credits</p> 
                    
                    <button id="buyRewardButton" class="btn btn-dark" type="submit">Extra Lives</button>
-                   </form>
+                   <br><br>
+                   <p>Lives: <strong><%=user.lives%></strong></p>
+                   <br>
+                  </form>
+                  
                 
                  
                 </div>
@@ -65,16 +81,19 @@
             </div>
      
       
+      <!--=============================================================================-->
+   
+
 
       <!--=============================================================================-->
 
            <div class="col-sm" id="event-card-">
-            <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+            <div class="card" style = "background-color: rgba(250,250,250, 0.5);">
               <div class="card-body rounded ">
               
                 <form id="rewardForm" action="/buyReward" method="POST">
                   <!-- Hidden input fields -->
-                  <input hidden type="text" name="username" value="<%= username %>"/>
+                  <input hidden type="text" name="username" value="<%= user.username %>"/>
                   <input hidden type="text" name="reward" value="points_2x"/> <!-- Replace with actual reward type -->
                   <input hidden type="text" name="cost" value="5"/> <!-- Replace with actual reward cost -->
                   <img src="img/dubPoints.png" height = "120">
@@ -83,8 +102,12 @@
                  
                   <!-- Button to trigger form submission -->
                   <button id="buyRewardButton" class="btn btn-dark" type="submit">Double Points</button>
+                  <p></p>
+                  <p>2x Points: <strong><%=user.points_2x%></strong></p>
+                  
+                
                 </form>
-              
+                
                
               </div>
             </div>
@@ -100,7 +123,7 @@
       <!--=============================================================================-->
         
     </div>
-  </div>
+  
   <%- include ('../partials/message') %>
   <%- include('../partials/footer') %>
 </main>

@@ -191,12 +191,13 @@ app.get('/home', (req, res) => {
   res.render("pages/home.ejs",{
    leaders : data,
    size: data.length,
-   username: req.session.user.username,
+   user: req.session.user
+  //  username: req.session.user.username,
  
-   highscore: req.session.user.highscore,
-   profile_pic: req.session.user.profile_pic,
-   lives: req.session.user.lives,
-   points_2x: req.session.user.points_2x
+  //  highscore: req.session.user.highscore,
+  //  profile_pic: req.session.user.profile_pic,
+  //  lives: req.session.user.lives,
+  //  points_2x: req.session.user.points_2x
 
 });
  })
@@ -516,13 +517,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
    // correct answers
    res.render("pages/rewards.ejs", 
    {
-   username: req.session.user.username,
-   password:req.session.user.password,
-   highscore:req.session.user.highscore,
-   answers_right:req.session.user.answers_right,
-   answers_wrong:req.session.user.answers_wrong,
-   all_time_score:req.session.user.all_time_score,
-   currency:req.session.user.currency
+   user: req.session.user
    
    
    }
@@ -548,6 +543,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
          all_time_score:req.session.user.all_time_score,
          currency:req.session.user.currency,
          message: "Not enough credits",
+         user: req.session.user,
          error: true
          
          
@@ -574,6 +570,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
              answers_wrong:req.session.user.answers_wrong,
              all_time_score:req.session.user.all_time_score,
              currency:req.session.user.currency,
+             user: req.session.user,
              message: "You bought an extra life!"
              
              
@@ -592,6 +589,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
              all_time_score:req.session.user.all_time_score,
              currency:req.session.user.currency,
              message: "Error with transaction",
+             user: req.session.user,
              error: true
              
              
@@ -617,6 +615,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
             answers_wrong:req.session.user.answers_wrong,
             all_time_score:req.session.user.all_time_score,
             currency:req.session.user.currency,
+            user: req.session.user,
             message: "You bought double points!"
             
             
@@ -635,6 +634,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
             all_time_score:req.session.user.all_time_score,
             currency:req.session.user.currency,
             message: "Error with transaction",
+            user: req.session.user,
             error: true
             
             
