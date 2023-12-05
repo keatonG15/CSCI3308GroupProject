@@ -3,10 +3,14 @@
 <main>
 
   <style>
-   .navbar{
-      background-color: transparent;
+   #navbarToggleExternalContent{
+        background-color:transparent;
+        color: white;
     }
-        
+    .navbar{
+        background-color: transparent;
+        color: white;
+    }
   body {
   width: 100vw;
   height: 100vh;
@@ -474,14 +478,14 @@
   <br><br><br> 
   <div class="row">
     <div class="column">
-      <div style="background-color:rgba(100,100,100, 0.5); border: solid black 1px;">
+      <div style="background-color:rgba(100,100,100, 0.5); border: solid black 1px; border-radius: 25px;">
       <h2>Top 5 Leaderboard</h2>
-      <table class ="table">
+      <table class ="table" >
         
     
        <% for(let i =0; i < size; i++){ %>
         <tbody>
-          <tr>
+          <tr style="border-bottom: 1px solid black;">
           
        <td scope ="row" width = '200px'> <%=i+1%></td>
       
@@ -574,7 +578,7 @@
 
 
       <br><br>
-      <div id="instructions"  style="display: inline-block;border: solid black 1px; background-color: rgba(100,100,100, 0.75); text-align: left; visibility: hidden;">
+      <div id="instructions"  style="display: inline-block;border: solid black 1px;border-radius: 25px; background-color: rgba(100,100,100, 0.75); text-align: left; visibility: hidden;">
         <br>
         <h3 style="text-align: center;">How to Play</h3>
         <ul>

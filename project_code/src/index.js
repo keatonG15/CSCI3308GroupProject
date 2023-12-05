@@ -252,10 +252,10 @@ axios({
    for(var i = 0; i < 10; i++){
 
     console.log(results.data[i].difficulty);
-
+    prev = req.session.user.curranswer;
     if(results.data[i].difficulty.localeCompare('medium') == 0 || results.data[i].difficulty.localeCompare('easy') == 0){
       console.log(results.data[i]);
-
+      
       req.session.user.curranswer = results.data[i].correctAnswer;
       check = 1;
 //===
@@ -269,15 +269,30 @@ axios({
          message: `Correct! Nice Job!`
        });
        break;
+ 
         }else{
-          res.render("pages/trivia.ejs",
-        {highscore: req.session.user.highscore, 
-         currscore: req.session.user.currentscore,
-         lives: req.session.user.lives, 
-         trivia: results.data,
-         index: i
-       });
-       break;
+          if(prev == null){
+            console.log('Here')
+            res.render("pages/trivia.ejs",
+            {highscore: req.session.user.highscore, 
+             currscore: req.session.user.currentscore,
+             lives: req.session.user.lives, 
+             trivia: results.data,
+             index: i
+           });
+           break;
+          }else{
+            console.log('There')
+            res.render("pages/trivia.ejs",
+            {highscore: req.session.user.highscore, 
+             currscore: req.session.user.currentscore,
+             lives: req.session.user.lives, 
+             trivia: results.data,
+             index: i
+
+           });
+           break;
+          }
        
         }
   //===
@@ -297,13 +312,28 @@ axios({
        message: `Correct! Nice Job!`
      });
       }else{
-        res.render("pages/trivia.ejs",
+
+if(prev == null){
+  res.render("pages/trivia.ejs",
+  {highscore: req.session.user.highscore, 
+   currscore: req.session.user.currentscore,
+   lives: req.session.user.lives, 
+   trivia: results.data,
+   index: 0
+ });
+}else{
+  res.render("pages/trivia.ejs",
       {highscore: req.session.user.highscore, 
        currscore: req.session.user.currentscore,
        lives: req.session.user.lives, 
        trivia: results.data,
+       message: `Correct answer was ${prev}`,
+       error: true,
        index: 0
      });
+}
+
+        
      
       }
    } 
