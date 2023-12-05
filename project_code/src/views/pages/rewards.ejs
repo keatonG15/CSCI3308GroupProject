@@ -2,38 +2,93 @@
 <%- include ('../partials/navbar') %> 
 <main>
   <style>
-     .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-        width: 300px;
-        height: 250px;
-       
-        
-        }
-        
-    main{
-      background-image: none;
-      background-color:  lightblue;
+    body, main {
+      font-family: 'Arial', sans-serif;
+      /* background-color: lightblue; */
       text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  
+    .card {
+      margin-bottom: 10px;
+      width: 300px;
+      height: 250px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  
+    .btn {
+      border-radius: 5px;
+      background-image: linear-gradient(to right, #4caf50, #81c784);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+  
+    .btn:hover {
+      background-image: linear-gradient(to right, #388e3c, #66bb6a);
+    }
+  
+    .profile-details strong {
+      color: #333;
     }
 
-    body{
-      background-image: none;
-      background-image: none;
-      background-color:  lightblue;
-    }
+    .profile-header {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
+  .profile-header h1 {
+    font-size: 2em; /* Adjust size as needed */
+    color: #333; /* Dark color for better contrast */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Black shadow for depth */
+  }
+
+  .profile-header p {
+    font-size: 1.2em;
+    color: #555; /* Slightly lighter than the heading */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  .navbar {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    /* Other styling properties */
+  }
+
+  /* Active/open state of the menu */
+  .navbar.active, .navbar.open {
+    background-color: rgba(0, 0, 0, 0.5); /* Keeping the same semi-transparent black */
+    /* Additional styling for the open state, if necessary */
+  }
+
+  /* Styling for individual menu items, if needed */
+  .navbar .menu-item {
+    color: white; /* or any other color that suits your design */
+    /* Other styling properties */
+  }
   </style>
+  
 
   
   <div class="profile">
     <div class="profile-header">
       <h1>Rewards Store</h1>
       <p>Use your currency to buy amazing rewards!</p>
+      <p>You have <strong><%= currency %></strong> credits available.</p>
     </div>
     <div class="profile-details">
-      <p>You have <strong><%= currency %></strong> credits available.</p>
+      
      
       <!--=============================================================================-->
       <div id="eventcards">
