@@ -2,9 +2,23 @@
 <%- include ('../partials/navbar') %> 
 <main>
   <style>
-    body, main {
-      font-family: 'Arial', sans-serif;
-      /* background-color: lightblue; */
+
+     .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        width: 300px;
+        height: 300px;
+       
+        
+        }
+        .navbar{
+      background-color: transparent;
+    }
+        
+    main{
+     
+
       text-align: center;
       max-width: 1200px;
       margin: 0 auto;
@@ -27,28 +41,16 @@
   
     .btn {
       border-radius: 5px;
-      background-image: linear-gradient(to right, #4caf50, #81c784);
       color: white;
       padding: 10px 20px;
       border: none;
       transition: background-color 0.3s ease;
     }
   
-    .btn:hover {
-      background-image: linear-gradient(to right, #388e3c, #66bb6a);
-    }
   
     .profile-details strong {
       color: #333;
     }
-
-    .profile-header {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
 
   .profile-header h1 {
     font-size: 2em; /* Adjust size as needed */
@@ -61,46 +63,89 @@
     color: #555; /* Slightly lighter than the heading */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
-  .navbar {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    /* Other styling properties */
-  }
+  .ocean {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
 
-  /* Active/open state of the menu */
-  .navbar.active, .navbar.open {
-    background-color: rgba(0, 0, 0, 0.5); /* Keeping the same semi-transparent black */
-    /* Additional styling for the open state, if necessary */
-  }
+    .ocean::after, 
+    .ocean::before {
+      background-color: white;
+      width: 120%;
+      height: 120px;
+      position: absolute;
+      content: '';
+      top: -80px;
+      left: -10%;
+      border-radius: 100%;
+      animation: waves 10s ease infinite;
+      opacity: 0.2;
+    }
 
-  /* Styling for individual menu items, if needed */
-  .navbar .menu-item {
-    color: white; /* or any other color that suits your design */
-    /* Other styling properties */
-  }
+    .ocean::before {
+      top: -60px;
+      animation-delay: 5s;
+      opacity: 0.1;
+      left: -5%;
+    }
+
+    @keyframes waves {
+      0%, 100% {transform: rotate(-2deg);}
+      50% {transform: rotate(2deg);}
+    }
+
   </style>
   
+  <div class="bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="fish">
+    <!-- eyes -->
+    <span></span>
+    <span></span>
+    <!-- mouth -->
+    <span></span>
+    <!-- bubbles -->
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+ </div>
+ 
+ 
 
-  
   <div class="profile">
     <div class="profile-header">
+      <div style="display: inline-block; background-color: rgba(250,250,250, 0.5);">
       <h1>Rewards Store</h1>
-      <p>Use your currency to buy amazing rewards!</p>
-      <p>You have <strong><%= currency %></strong> credits available.</p>
-    </div>
-    <div class="profile-details">
-      
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use your currency to buy amazing rewards! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+    
+      <p>You have <strong><%= user.currency %></strong> credits available.</p>   
+
+      <!-- <p>You have <strong><%=user.lives%></strong> lives.</p>
+      <p>You have <strong><%=user.points_2x%> </strong>double points available.</p> -->
+</div>
      
       <!--=============================================================================-->
       <div id="eventcards">
          <div class="row">
 
             <div class="col-sm" id="event-card-">
-              <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+              <div class="card" style = "background-color: rgba(250,250,250, 0.5);">
                 <div class="card-body rounded ">
                 
                   <form id="rewardForm" action="/buyReward" method="POST">
                     <!-- Hidden input fields -->
-                   <input hidden type="text" name="username" value="<%= username %>"/>
+                   <input hidden type="text" name="username" value="<%= user.username %>"/>
                    <input hidden type="text" name="reward" value="extralife"/> <!-- Replace with actual reward type -->
                    <input hidden type="text" name="cost" value="3"/> <!-- Replace with actual reward cost -->
            
@@ -112,7 +157,11 @@
                    <p>3 Credits</p> 
                    
                    <button id="buyRewardButton" class="btn btn-dark" type="submit">Extra Lives</button>
-                   </form>
+                   <br><br>
+                   <p>Lives: <strong><%=user.lives%></strong></p>
+                   <br>
+                  </form>
+                  
                 
                  
                 </div>
@@ -120,16 +169,19 @@
             </div>
      
       
+      <!--=============================================================================-->
+   
+
 
       <!--=============================================================================-->
 
            <div class="col-sm" id="event-card-">
-            <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+            <div class="card" style = "background-color: rgba(250,250,250, 0.5);">
               <div class="card-body rounded ">
               
                 <form id="rewardForm" action="/buyReward" method="POST">
                   <!-- Hidden input fields -->
-                  <input hidden type="text" name="username" value="<%= username %>"/>
+                  <input hidden type="text" name="username" value="<%= user.username %>"/>
                   <input hidden type="text" name="reward" value="points_2x"/> <!-- Replace with actual reward type -->
                   <input hidden type="text" name="cost" value="5"/> <!-- Replace with actual reward cost -->
                   <img src="img/dubPoints.png" height = "120">
@@ -138,8 +190,12 @@
                  
                   <!-- Button to trigger form submission -->
                   <button id="buyRewardButton" class="btn btn-dark" type="submit">Double Points</button>
+                  <p></p>
+                  <p>2x Points: <strong><%=user.points_2x%></strong></p>
+                  
+                
                 </form>
-              
+                
                
               </div>
             </div>
@@ -155,7 +211,9 @@
       <!--=============================================================================-->
         
     </div>
-  </div>
+  
+    
+
   <%- include ('../partials/message') %>
   <%- include('../partials/footer') %>
 </main>
