@@ -77,7 +77,10 @@ app.use(
 // *****************************************************
 // <!-- Section 4: API Calls -->
 // *****************************************************
-
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+ });
+ 
 
 app.get('/', (req ,res) =>{
  res.redirect('/login');
@@ -188,12 +191,13 @@ app.get('/home', (req, res) => {
   res.render("pages/home.ejs",{
    leaders : data,
    size: data.length,
-   username: req.session.user.username,
+   user: req.session.user
+  //  username: req.session.user.username,
  
-   highscore: req.session.user.highscore,
-   profile_pic: req.session.user.profile_pic,
-   lives: req.session.user.lives,
-   points_2x: req.session.user.points_2x
+  //  highscore: req.session.user.highscore,
+  //  profile_pic: req.session.user.profile_pic,
+  //  lives: req.session.user.lives,
+  //  points_2x: req.session.user.points_2x
 
 });
  })
@@ -248,10 +252,10 @@ axios({
    for(var i = 0; i < 10; i++){
 
     console.log(results.data[i].difficulty);
-
+    prev = req.session.user.curranswer;
     if(results.data[i].difficulty.localeCompare('medium') == 0 || results.data[i].difficulty.localeCompare('easy') == 0){
       console.log(results.data[i]);
-
+      
       req.session.user.curranswer = results.data[i].correctAnswer;
       check = 1;
 //===
@@ -265,15 +269,30 @@ axios({
          message: `Correct! Nice Job!`
        });
        break;
+ 
         }else{
-          res.render("pages/trivia.ejs",
-        {highscore: req.session.user.highscore, 
-         currscore: req.session.user.currentscore,
-         lives: req.session.user.lives, 
-         trivia: results.data,
-         index: i
-       });
-       break;
+          if(prev == null){
+            console.log('Here')
+            res.render("pages/trivia.ejs",
+            {highscore: req.session.user.highscore, 
+             currscore: req.session.user.currentscore,
+             lives: req.session.user.lives, 
+             trivia: results.data,
+             index: i
+           });
+           break;
+          }else{
+            console.log('There')
+            res.render("pages/trivia.ejs",
+            {highscore: req.session.user.highscore, 
+             currscore: req.session.user.currentscore,
+             lives: req.session.user.lives, 
+             trivia: results.data,
+             index: i
+
+           });
+           break;
+          }
        
         }
   //===
@@ -293,13 +312,28 @@ axios({
        message: `Correct! Nice Job!`
      });
       }else{
-        res.render("pages/trivia.ejs",
+
+if(prev == null){
+  res.render("pages/trivia.ejs",
+  {highscore: req.session.user.highscore, 
+   currscore: req.session.user.currentscore,
+   lives: req.session.user.lives, 
+   trivia: results.data,
+   index: 0
+ });
+}else{
+  res.render("pages/trivia.ejs",
       {highscore: req.session.user.highscore, 
        currscore: req.session.user.currentscore,
        lives: req.session.user.lives, 
        trivia: results.data,
+       message: `Correct answer was ${prev}`,
+       error: true,
        index: 0
      });
+}
+
+        
      
       }
    } 
@@ -487,10 +521,7 @@ db.any(endGame, [reset, '3', '0', wrong,  req.session.user.username])
 
 });
 
-app.get('/welcome', (req, res) => {
-  res.json({status: 'success', message: 'Welcome!'});
- });
- 
+
  
  
  
@@ -516,13 +547,7 @@ app.get('/welcome', (req, res) => {
    // correct answers
    res.render("pages/rewards.ejs", 
    {
-   username: req.session.user.username,
-   password:req.session.user.password,
-   highscore:req.session.user.highscore,
-   answers_right:req.session.user.answers_right,
-   answers_wrong:req.session.user.answers_wrong,
-   all_time_score:req.session.user.all_time_score,
-   currency:req.session.user.currency
+   user: req.session.user
    
    
    }
@@ -548,6 +573,7 @@ app.get('/welcome', (req, res) => {
          all_time_score:req.session.user.all_time_score,
          currency:req.session.user.currency,
          message: "Not enough credits",
+         user: req.session.user,
          error: true
          
          
@@ -574,6 +600,7 @@ app.get('/welcome', (req, res) => {
              answers_wrong:req.session.user.answers_wrong,
              all_time_score:req.session.user.all_time_score,
              currency:req.session.user.currency,
+             user: req.session.user,
              message: "You bought an extra life!"
              
              
@@ -592,6 +619,7 @@ app.get('/welcome', (req, res) => {
              all_time_score:req.session.user.all_time_score,
              currency:req.session.user.currency,
              message: "Error with transaction",
+             user: req.session.user,
              error: true
              
              
@@ -617,6 +645,7 @@ app.get('/welcome', (req, res) => {
             answers_wrong:req.session.user.answers_wrong,
             all_time_score:req.session.user.all_time_score,
             currency:req.session.user.currency,
+            user: req.session.user,
             message: "You bought double points!"
             
             
@@ -635,6 +664,7 @@ app.get('/welcome', (req, res) => {
             all_time_score:req.session.user.all_time_score,
             currency:req.session.user.currency,
             message: "Error with transaction",
+            user: req.session.user,
             error: true
             
             
@@ -649,8 +679,8 @@ app.get('/welcome', (req, res) => {
  
 app.get('/logout', (req,res) =>{
  req.session.destroy();
- res.render('pages/login', {message: `Logged Out Successfully`});
-
+ //res.render('pages/login', {message: `Logged Out Successfully`});
+res.redirect('/login');
 
 });
 

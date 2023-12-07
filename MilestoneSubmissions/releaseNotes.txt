@@ -25,7 +25,7 @@ RELEASE NOTES 'THINK TANK TRIVIA'
     - Implemented buttons on home page that allow for more user interaction.
     - How to play button. 
     - Enter the tank button.
-    Future Release goals
+    Future Release Goals:
     - Implement Nav Bar for seamless flow.
     - Implement Profile Page. 
     - Implement more pictures.
@@ -44,7 +44,7 @@ RELEASE NOTES 'THINK TANK TRIVIA'
     - Implemented rank system for both XP and Rank.
     - Added a variety of profile pictures that users can pick from.
     - Profile page updated to show stats such as, High Score, Answers Right, Answers Wrong, All Time Score and Currency. 
-    Future Release Goals
+    Future Release Goals:
     - Add a carousel that goes through some questions so users know what they are getting into.
     - Add API calls for rank system and XP level system.
     - Game over UI possible change.
@@ -52,12 +52,28 @@ RELEASE NOTES 'THINK TANK TRIVIA'
     - Implement more test cases and get ready for launch next week.
 ======================================================================================================================================================================================
 11/30 7:00 PM Release Notes v1.1.2 -beta 
-    -Implemented Fully functional profile page.
+    - Implemented Fully functional profile page.
     - Players can see ranking system and where they stand in XP and normal rank.
+======================================================================================================================================================================================
+12/01 12:30 PM Release Notes v1.1.3 -beta 
+    - Fixed all test cases.
+    - Rewards is up and running.
+    - Changed difficulty of questions to just easy and medium.
+    Future Goals for Deployment
+    - Add some more pictures.
+    - CHANGE CSS especially for trivia.ejs
+    - Make a better and nicer UI.
+    - Mainly just styling.
+======================================================================================================================================================================================
 
 
 
 
 
 
+<<<<<<< HEAD
 
+
+Keep question and answers them  main focus, move timer up to top rightFocus mostly on CSS and 
+=======
+>>>>>>> 77d907ffe660bcad104b169303d21852008d3052
