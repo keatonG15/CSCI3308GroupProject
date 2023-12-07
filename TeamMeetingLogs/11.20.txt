@@ -1,0 +1,13 @@
+11/20 Team 016-001
+
+Decisions Made
+Joao and Keaton Work on Rewards tab functionality 
+Qunincy and Norby keep track of the labs coming up
+
+What are you planning to do until the next meeting?
+Joao and Keaton Work on Rewards tab functionality 
+Qunincy and Norby keep track of the labs coming up
+
+What are the challenges you are facing?
+Still struggling to get the test cases to test session variables which is messing up our website
+
