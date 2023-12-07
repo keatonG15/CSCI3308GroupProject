@@ -65,15 +65,19 @@ RELEASE NOTES 'THINK TANK TRIVIA'
     - Make a better and nicer UI.
     - Mainly just styling.
 ======================================================================================================================================================================================
+12/05 1:00 PM Release Notes v1.1.4 -beta 
+- Fixed styling on home and profile pages to look better. 
+-Created common theme colors
+-Created a hover feature for 
+Future Goals for Deployment:
+- Work on styling for rewards page.
+- Work on the front 
 
 
 
 
 
 
-<<<<<<< HEAD
 
 
-Keep question and answers them  main focus, move timer up to top rightFocus mostly on CSS and 
-=======
->>>>>>> 77d907ffe660bcad104b169303d21852008d3052
+
