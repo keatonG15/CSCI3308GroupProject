@@ -1,19 +1,79 @@
-RELEASE NOTES (DATE,TIME,VERSION) Team 016-001
+
+RELEASE NOTES 'THINK TANK TRIVIA' 
+
 
 11/09 1:15 PM Release Notes v1.0.0 - alpha
     - Website is up and going where users can create an account and login to start playing the trivia game.
     - Users will be displayed with a question, and answers will appear in red or green indicating right and wrong answers.
-    - API from "The Trivia API" is working properly.
-    Future Release Goals 
     - Need to figure out how to store high score properly
     - Need to redirect API and make and axios call that displays a new question
     - Better UI and graphic design. 
+======================================================================================================================================================================================
+11/12 4:00 PM Release Notes v1.1.0 -alpha 
+    - Website Functionality added where the button are now jumbled to the so the user doesn't always know what the answer is.
+    - Added Logout functionality to where the user can logout when expected.
+    - Added test cases using chai mocha so developers know that the login functionality is working correctly and that the home page is rendering properly.
+    - Added pictures and better styles.
+    Future Release Goals:
+    - Need to work on the style of the website and make it look nicer for the user.
+    - Find a bootstrap class we can use to implement columns that appeal to the syles and user. 
+    - Make a leaderboard that displays the top 10 highest scores from users.
+    - Make a detalied profile section that holds stats about user. 
+======================================================================================================================================================================================
+11/17 1:00 PM Release Notes v1.1.1 -beta 
+    - Implemeted leaderboard on home page.
+    - Implemented buttons on home page that allow for more user interaction.
+    - How to play button. 
+    - Enter the tank button.
+    Future Release Goals:
+    - Implement Nav Bar for seamless flow.
+    - Implement Profile Page. 
+    - Implement more pictures.
+======================================================================================================================================================================================
+11/23 3:00 PM Release Notes v1.1.2 -beta 
+    - Implemented rewards store, still needs bug fixes. 
+    - 10 second timer and 3 lives are now added to the game so its not just one and done.
+    - Updated the "tank" graphic with hearts for lives. 
+    Future Release Goals:
+    - Profile Page (In progress) that stores a variety of stats. 
+    - Profile Pictures.
+    - Set up rewards store for full functionality.
+======================================================================================================================================================================================
+11/29 7:00 PM Release Notes v1.1.2 -beta 
+    - Implemented a profile page. 
+    - Implemented rank system for both XP and Rank.
+    - Added a variety of profile pictures that users can pick from.
+    - Profile page updated to show stats such as, High Score, Answers Right, Answers Wrong, All Time Score and Currency. 
+    Future Release Goals:
+    - Add a carousel that goes through some questions so users know what they are getting into.
+    - Add API calls for rank system and XP level system.
+    - Game over UI possible change.
+    - Possibly add more changes home page.
+    - Implement more test cases and get ready for launch next week.
+======================================================================================================================================================================================
+11/30 7:00 PM Release Notes v1.1.2 -beta 
+    - Implemented Fully functional profile page.
+    - Players can see ranking system and where they stand in XP and normal rank.
+======================================================================================================================================================================================
+12/01 12:30 PM Release Notes v1.1.3 -beta 
+    - Fixed all test cases.
+    - Rewards is up and running.
+    - Changed difficulty of questions to just easy and medium.
+    Future Goals for Deployment
+    - Add some more pictures.
+    - CHANGE CSS especially for trivia.ejs
+    - Make a better and nicer UI.
+    - Mainly just styling.
+======================================================================================================================================================================================
 
-11/09 4:00 Release Notes v1.1.0 -alpha 
 
 
 
 
 
+<<<<<<< HEAD
 
 
+Keep question and answers them  main focus, move timer up to top rightFocus mostly on CSS and 
+=======
+>>>>>>> 77d907ffe660bcad104b169303d21852008d3052

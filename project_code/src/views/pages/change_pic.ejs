@@ -1,10 +1,12 @@
 <%- include ('../partials/header') %> 
+<%- include ('../partials/navbar') %> 
+
 <style>
     .card {
     margin: 0 auto; /* Added */
     float: none; /* Added */
     margin-bottom: 0px; /* Added */
-    background-color: rgb(87,187,226);
+    
     
     }
     
@@ -22,36 +24,42 @@
   </style>
 <main >
    
-    <img src="<%=profile_pic%>" width = '100px'>
-
+    <img src="<%=profile_pic%>" height = '200px'>
+<br><p></p>
     <div class="container">
         <!-- THE REST OF YOUR HTML CODE GOES HERE -->
           <!--Hobby Cards-->
          
           <div id="eventcards">
+            <% for (let x = 0; x < 4; x++) { %>
             <div class="row">
-             
-              <% for (let i = 0; i < 4; i++) { %>
+            
+              <% for (let i = 0; i < 8; i++) { %>
                 <!--Event Card:-->
-                <div class="col-sm " id="event-card-">
-                  <div class="card">
-                    <div class="card-body rounded">
+                
+                <div class="col-sm card-group" id="event-card-">
+                  <div class="card" style = "background-color: rgba(86,187,229, 0.5);">
+                    <div class="card-body rounded ">
                     
-                     <img src="img/prof<%=i%>.png"  width = '100px'>
+                     <img src="img/prof<%=i + 8*x%>.png"  width = '100px'>
+                     <p></p>
                      <form action="/change_pic_post" method="POST">
-                        <input id="h1"  hidden type="text" name="selection" value="img/prof<%=i%>.png"/>
+                        <input id="h1"  hidden type="text" name="selection" value="img/prof<%=i + 8*x%>.png"/>
                         <button  id="A1"  class="btn btn-dark" type="submit" >Select</button>
                       </form> <!-- src = "<= events[i].images[0].url%>" -->
-                      <br><br>
+                    
                      
                     </div>
                   </div>
                 </div>
                 <% } %>
+                <br>
+                <p></p>
               </div>
+              <%}%>
         </div>
       </div>
-
+<br><br><br><br><br><br>
   
 
 </main>
