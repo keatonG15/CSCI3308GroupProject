@@ -92,3 +92,4 @@ If this is not the case, comment out server.spec.js and run docker compose up wi
 
 
 Link to the deployed application
+http://recitation-16-team-01.eastus.cloudapp.azure.com:3000
