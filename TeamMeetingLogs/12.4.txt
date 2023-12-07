@@ -1,0 +1,14 @@
+12/4 Team 016-001
+
+Decisions Made
+Focus on style and testing, no longer adding functionalitites
+
+What are you planning to do until the next meeting?
+Joao do rewards tab design
+Keaton do trivia page design
+Quincy does home page design
+Norby does profile page design
+Debug and test, have friends play the game and observe
+
+What are the challenges you are facing?
+Finding small bugs and making the website 100% perfect. 
