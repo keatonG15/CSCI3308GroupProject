@@ -72,6 +72,11 @@ RELEASE NOTES 'THINK TANK TRIVIA'
 Future Goals for Deployment:
 - Work on styling for rewards page.
 - Work on the front 
+======================================================================================================================================================================================
+12/06 7:00 PM Release Notes v1.1.5 - DEPLOYMENT
+- Changed all styles to make UI great and appeasing to the eyes.
+- Added effects such as a fish and bubbles.
+- Ready for full DEPLOYMENT!
 
 
 
