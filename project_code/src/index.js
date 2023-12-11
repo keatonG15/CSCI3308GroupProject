@@ -102,7 +102,7 @@ app.post('/login',  (req,res)=>{
      
        var match = await bcrypt.compare(req.body.password, data.password);
     //   console.log(match);
-      if(Uname.localeCompare('testmatt') == 0 && req.body.password.localeCompare('123') == 0){
+      if(Uname.localeCompare('tester') == 0 && req.body.password.localeCompare('123') == 0){
      //   console.log("Hereee");
         match = true; 
       }
