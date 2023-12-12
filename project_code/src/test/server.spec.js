@@ -41,7 +41,7 @@ describe('Testing Login APIs', () => {
      chai
        .request(server)
        .post('/login')
-       .send({username: 'testmatt', password: '123' })
+       .send({username: 'tester', password: '123' })
        .redirects(0)
        .end((err, res) => {
         console.log("Cookies" + res.headers['set-cookie']);

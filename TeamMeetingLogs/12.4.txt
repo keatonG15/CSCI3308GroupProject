@@ -1,4 +1,5 @@
 12/4 Team 016-001
+Minutes of meeting: 15
 
 Decisions Made
 Focus on style and testing, no longer adding functionalitites
