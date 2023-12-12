@@ -1,4 +1,6 @@
 11/9 Team 016-001
+Minutes of meeting: 15
+
 Intended Strategy
 Week1: Get basic HTML page running with login and registration complete
 Week2: Familiarize with Trivia API and how to run the correct axios call
