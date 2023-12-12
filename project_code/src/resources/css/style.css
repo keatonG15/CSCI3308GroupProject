@@ -15,9 +15,7 @@ body{
   
 .card {
 margin-bottom: 10px;
-width: 300px;
-height: 250px;
-background-color: rgba(255, 255, 255, 0.5);
+
 border-radius: 10px;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -37,18 +35,3 @@ transition: background-color 0.3s ease;
 }
 
 
-.profile-details strong {
-color: #333;
-}
-
-.profile-header h1 {
-font-size: 2em; /* Adjust size as needed */
-color: #333; /* Dark color for better contrast */
-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Black shadow for depth */
-}
-
-.profile-header p {
-font-size: 1.2em;
-color: #555; /* Slightly lighter than the heading */
-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
